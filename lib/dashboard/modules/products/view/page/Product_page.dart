@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_app/dashboard/modules/products/controller/Mobile_cubit.dart';
+import 'package:mobile_app/dashboard/modules/products/controller/Product_cubit.dart';
 import 'package:mobile_app/dashboard/modules/products/view/components/Product_widget.dart';
 
 class UserPage extends StatelessWidget {
@@ -10,14 +10,14 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MobileCubit(),
-      child: BlocBuilder<MobileCubit, MobilePhonesState>(
+      create: (context) => ProductCubit(),
+      child: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
-          final MobileCubit controller = context.read<MobileCubit>();
+          final ProductCubit controller = context.read<ProductCubit>();
           return Scaffold(
-            body: state is MobilePhonesLoading
+            body: state is ProductStateLoading
                 ? const CircularProgressIndicator()
-                : state is MobilePhonesEmpty
+                : state is ProductStateEmpty
                     ? const Center(
                         child: Icon(
                         CupertinoIcons.delete,
@@ -33,10 +33,10 @@ class UserPage extends StatelessWidget {
                         //       height: 1,
                         //       thickness: 5,
                         //     ),
-                        itemCount: controller.MobilePhones.length,
+                        itemCount: controller.products.length,
                         itemBuilder: (_, int index) {
                           return ProductItemWidget(
-                              mobilePhones: controller.MobilePhones[index]);
+                              mobilePhones: controller.products[index]);
                         }),
           );
         },

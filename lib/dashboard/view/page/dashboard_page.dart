@@ -4,12 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app/dashboard/controller/cubit/dashboard_cubit.dart';
 import 'package:mobile_app/dashboard/modules/Home/view/home_page.dart';
 import 'package:mobile_app/utils/colors/colors_constant.dart';
-import 'package:mobile_app/dashboard/modules/products/view/page/Product_page.dart';
-
 import '../../modules/users/view/page/Product_page.dart';
 
 class DashboardPage extends StatelessWidget {
-  final List<String> titles = const ['Home', 'Products', 'Services'];
+  final List<String> titles = const ['Home', 'Products', 'Profile'];
   const DashboardPage({super.key});
 
   @override
@@ -37,7 +35,7 @@ class DashboardPage extends StatelessWidget {
               children: const [
                 HomeScreen(),
                 ProductPage(),
-                Text("Services"),
+                Text("Profile"),
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(

@@ -7,6 +7,8 @@ import 'package:mobile_app/dashboard/modules/users/model/repo/local_db_data.dart
 part 'Mobile_state.dart';
 
 class MobileCubit extends Cubit<MobilePhonesState> {
+  static MobileCubit instance = MobileCubit();
+
   MobileCubit() : super(MobilePhonesLoading()) {
     init();
   }
