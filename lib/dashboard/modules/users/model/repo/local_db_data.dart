@@ -120,14 +120,14 @@ class DatabaseRepo extends ParentRepo {
 
   Future<List<ProductModel>> fetchFavoriteProducts() async {
     return (await database
-            .query('MobilePhones', where: 'Favorite=?', whereArgs: [true]))
+            .query('MobilePhones', where: 'Favorite=?', whereArgs: [1]))
         .map((e) => ProductModel.fromJson(e))
         .toList();
   }
 
   Future<List<ProductModel>> fetchCartProducts() async {
     return (await database
-            .query('MobilePhones', where: 'Cart=?', whereArgs: [true]))
+            .query('MobilePhones', where: 'Cart=?', whereArgs: [1]))
         .map((e) => ProductModel.fromJson(e))
         .toList();
   }
@@ -168,10 +168,10 @@ class DatabaseRepo extends ParentRepo {
 
   // Update record by specified ID => adding the product to Cart Products
   @override
-  Future<void> UpdateCart({
-    required int id,
-    required int cart,
-  }) async {
+  Future<void> UpdateCart(
+    int id,
+    int cart,
+  ) async {
     await database.update(
       'MobilePhones',
       {
@@ -184,10 +184,10 @@ class DatabaseRepo extends ParentRepo {
 
   // Update record by specified ID => adding the product to Favorite Products
   @override
-  Future<void> UpdateFavorite({
-    required int id,
-    required int favorite,
-  }) async {
+  Future<void> UpdateFavorite(
+    int id,
+    int favorite,
+  ) async {
     await database.update(
       'MobilePhones',
       {

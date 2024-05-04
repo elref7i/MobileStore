@@ -28,15 +28,24 @@ class ProductItemWidget extends StatelessWidget {
               ///product info
               Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image.memory(
-                      (productModel.Image ?? Uint8List(10)),
-                      height: 50,
-                      width: 50,
-                      fit: BoxFit.fill,
+                  if (productModel.Image != null &&
+                      (productModel.Image!.isNotEmpty) &&
+                      (productModel.Image!.length > 10))
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.memory(
+                        (productModel.Image ?? Uint8List(10)),
+                        height: 150,
+                        width: 150,
+                        fit: BoxFit.fill,
+                      ),
+                    )
+                  else
+                    Icon(
+                      CupertinoIcons.cube_box_fill,
+                      size: 50,
+                      color: Colors.blue.withAlpha(150),
                     ),
-                  ),
                   SizedBox(
                     width: 10,
                   ),
@@ -96,9 +105,9 @@ class ProductItemWidget extends StatelessWidget {
                           ),
                     onTap: () {
                       if (productModel.Favorite == 1) {
-                        controller.addToFavourite(productModel.Id ?? 0, false);
+                        controller.addToFavourite(productModel.Id ?? 1, 0);
                       } else {
-                        controller.addToFavourite(productModel.Id ?? 0, true);
+                        controller.addToFavourite(productModel.Id ?? 1, 1);
                       }
                     },
                   ),
@@ -112,16 +121,22 @@ class ProductItemWidget extends StatelessWidget {
 
                   ///cart
                   InkWell(
-                    child: productModel.Cart == true
+                    child: productModel.Cart == 1
                         ? const Icon(
                             CupertinoIcons.cart,
                             color: Colors.blue,
                           )
                         : const Icon(
                             CupertinoIcons.cart,
-                            color: Colors.blue,
+                            color: Colors.red,
                           ),
-                    onTap: () {},
+                    onTap: () {
+                      if (productModel.Cart == 1) {
+                        controller.addToCart(productModel.Id ?? 1, 0);
+                      } else {
+                        controller.addToCart(productModel.Id ?? 1, 1);
+                      }
+                    },
                   ),
                 ],
               )

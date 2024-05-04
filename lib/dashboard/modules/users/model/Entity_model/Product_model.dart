@@ -34,7 +34,7 @@ class ProductModel {
 
   ProductModel.fromJson(Map mp) {
     log(mp.toString());
-    Id = mp['ID'];
+    Id = mp['Id'];
     Brand = mp['Brand'];
     Model = mp['Model'];
     StorageCapacity = mp['StorageCapacity'];

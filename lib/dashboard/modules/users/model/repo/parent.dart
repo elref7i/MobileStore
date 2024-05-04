@@ -40,15 +40,15 @@ abstract class ParentRepo {
   Future<void> UpdateQuantity({required int id, required int quantity});
 
   // Update record for specified ID adding the product to Cart Products
-  Future<void> UpdateCart({
-    required int id,
-    required int cart,
-  });
+  Future<void> UpdateCart(
+    int id,
+    int cart,
+  );
   // Update record for specified ID adding the product to Favorite Products
-  Future<void> UpdateFavorite({
-    required int id,
-    required int favorite,
-  });
+  Future<void> UpdateFavorite(
+    int id,
+    int favorite,
+  );
 
   // Update Product price using discount in MobilePhones Table
   Future<void> UpdatePrice({

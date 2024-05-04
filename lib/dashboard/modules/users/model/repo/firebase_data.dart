@@ -126,10 +126,10 @@ class FirebaseRepo extends ParentRepo {
 
   // Update record by specified ID for Cart Products
   @override
-  Future<void> UpdateCart({
-    required int id,
-    required int cart,
-  }) async {
+  Future<void> UpdateCart(
+    int? id,
+    int? cart,
+  ) async {
     await _database.update(
       'MobilePhones',
       {
@@ -142,10 +142,10 @@ class FirebaseRepo extends ParentRepo {
 
   // Update record by specified ID for Favorite Products
   @override
-  Future<void> UpdateFavorite({
-    required int id,
-    required int favorite,
-  }) async {
+  Future<void> UpdateFavorite(
+    int? id,
+    int? favorite,
+  ) async {
     await _database.update(
       'MobilePhones',
       {

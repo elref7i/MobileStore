@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';
+import 'package:mobile_app/dashboard/modules/users/model/repo/firebase_data.dart';
 import 'package:mobile_app/dashboard/modules/users/model/repo/local_db_data.dart';
 import 'package:sqflite/sqlite_api.dart';
 
@@ -33,7 +34,7 @@ class ProductCubit extends Cubit<ProductState> {
         quantity: 1);
     emit(ProductStateLoading());
     products = await (await DatabaseRepo.instance).fetch();
-    // MobilePhones = await (await FirebaseRepo.instance).fetch();
+    //  await (await FirebaseRepo.instance).fetch();
     if (products.isEmpty) {
       emit(ProductStateEmpty());
     } else {
@@ -41,16 +42,16 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-  void addToCart(int id, int state) async {
-    log(id as String);
-    // await DatabaseRepo.instance.UpdateCart(id,state);
+  Future<void> addToCart(int id, int state) async {
+    log(id.toString());
+    await (await DatabaseRepo.instance).UpdateCart(id, state);
     init();
     emit(ProductStateLoaded());
   }
 
-  void addToFavourite(int id, bool state) async {
-    log(id as String);
-    // await DatabaseRepo.instance.UpdateFavorite(id,state);
+  Future<void> addToFavourite(int id, int state) async {
+    log(id.toString());
+    await (await DatabaseRepo.instance).UpdateFavorite(id, state);
     init();
     emit(ProductStateLoaded());
   }
