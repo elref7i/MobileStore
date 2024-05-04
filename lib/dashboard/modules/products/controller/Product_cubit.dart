@@ -14,20 +14,25 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit() : super(ProductStateLoading()) {
     init();
   }
-  // DatabaseRepo repo = DatabaseRepo();
   List<ProductModel> products = [];
 
   Future<void> init() async {
+    await (await DatabaseRepo.instance).insert(
+        brand: 'Samsung_Galaxy',
+        model: 'S 23',
+        storageCapacity: 64,
+        color: 'BLACK',
+        price: 22000,
+        screenSize: 6,
+        ramCapacity: 6,
+        processor: 'processor',
+        cameraResolution: "cameraResolution",
+        os: 'os',
+        year: 2024,
+        image: Uint8List(10),
+        quantity: 1);
     emit(ProductStateLoading());
     products = await (await DatabaseRepo.instance).fetch();
-
-    // products =  await ( DatabaseRepo.instance).insert (
-    //    brand: 'brand', model: 'model', storageCapacity: 64,
-    //    color: 'color', price: 9000, screenSize: 6.7,
-    //    ramCapacity: 6, processor: 'processor',
-    //    cameraResolution: "cameraResolution", os: "os", year: 2024,
-    //    image: Uint32List(10), quantity: 1);
-
     // MobilePhones = await (await FirebaseRepo.instance).fetch();
     if (products.isEmpty) {
       emit(ProductStateEmpty());
@@ -36,7 +41,7 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-  void addToCart(int id, bool state) async {
+  void addToCart(int id, int state) async {
     log(id as String);
     // await DatabaseRepo.instance.UpdateCart(id,state);
     init();

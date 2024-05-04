@@ -23,39 +23,38 @@ class DatabaseRepo extends ParentRepo {
     // Get the path of the database file
     final String databasePath = await getDatabasesPath();
     // add files to the database
-    final String path = databasePath + "/MobilePhones.db";
+    final String path = databasePath + "/Store.db";
 
     database = await openDatabase(
       path,
-      version: 1,
+      version: 88,
       onCreate: _createTables,
     );
   }
 
-  //
   static Future<void> _createTables(Database db, _) async {
     await db.execute("""
     CREATE TABLE MobilePhones (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
     Brand VARCHAR(50) NOT NULL,
     Model VARCHAR(100) NOT NULL,
-    StorageCapacity INT NOT NULL,
+    StorageCapacity INTEGER NOT NULL,
     Color VARCHAR(50) ,
-    Price DECIMAL(10, 2) NOT NULL,
-    Screen_size DECIMAL(4, 2),
-    RamCapacity INT,
-    Processor VARCHAR(100) NOT NULL DEFAULT ,
+    Price INTEGER(10, 2) NOT NULL,
+    Screen_size INTEGER(4, 2),
+    RamCapacity INTEGER,
+    Processor VARCHAR(100) NOT NULL DEFAULT '64MP',
     CameraResolution VARCHAR(50),
     OS VARCHAR(50) NOT NULL,
-    Year YEAR,
-    AvailabilityState ENUM('In Stock', 'Out of Stock') DEFAULT 'In Stock',
-    Favorite BOOLEAN DEFAULT false,
-    Cart BOOLEAN DEFAULT false,
+    Year INTEGER,
+    AvailabilityState INTEGER DEFAULT 1,
+    Favorite INTEGER DEFAULT 0,
+    Cart INTEGER DEFAULT 0,
     Description TEXT,
     Image BLOB NOT NULL,
     Video BLOB,
-    Quantity INT, 
-    Discount DECIMAL(10, 2) DEFAULT 0
+    Quantity INTEGER,
+    Discount INTEGER(10, 2) DEFAULT 0.0
   );
     """);
   }
@@ -67,21 +66,21 @@ class DatabaseRepo extends ParentRepo {
     required String model,
     required int storageCapacity,
     required String color,
-    required double price,
-    required double screenSize,
+    required int price,
+    required int screenSize,
     required int ramCapacity,
     required String processor,
     required String cameraResolution,
     required String os,
     required int year,
-    String availabilityState = 'In Stock',
-    bool favorite = false,
-    bool cart = false,
+    int availabilityState = 1,
+    int favorite = 0,
+    int cart = 0,
     String description = '''Here you can find all the information you need ''',
-    required Uint32List image,
-    Uint64List? video,
+    required Uint8List image,
+    Uint8List? video,
     required int quantity,
-    double? discount,
+    int? discount,
   }) async {
     await database.insert(
       'MobilePhones',
@@ -107,12 +106,13 @@ class DatabaseRepo extends ParentRepo {
         'Discount': discount,
       },
     );
+    log("insert in product_cubit file done");
   }
 
   // fetch Product from MobilePhones Table
   @override
   Future<List<ProductModel>> fetch() async {
-    log((await database.getVersion()).toString());
+    log((await database.getVersion()).toString() + ' fetched product');
     return (await database.query('MobilePhones'))
         .map((e) => ProductModel.fromJson(e))
         .toList();
@@ -140,7 +140,7 @@ class DatabaseRepo extends ParentRepo {
   @override
   Future<void> UpdateProductState({
     required int id,
-    required String availabilityState,
+    required int availabilityState,
     required int quantity,
   }) async {
     await database.update(
@@ -160,7 +160,7 @@ class DatabaseRepo extends ParentRepo {
     await DatabaseRepo.instance.then((DB) {
       DB.UpdateProductState(
         id: id,
-        availabilityState: quantity > 0 ? 'In Stock' : 'Out of Stock',
+        availabilityState: quantity > 0 ? 1 : 0,
         quantity: quantity,
       );
     });
@@ -170,7 +170,7 @@ class DatabaseRepo extends ParentRepo {
   @override
   Future<void> UpdateCart({
     required int id,
-    required bool cart,
+    required int cart,
   }) async {
     await database.update(
       'MobilePhones',
@@ -186,7 +186,7 @@ class DatabaseRepo extends ParentRepo {
   @override
   Future<void> UpdateFavorite({
     required int id,
-    required bool favorite,
+    required int favorite,
   }) async {
     await database.update(
       'MobilePhones',
@@ -202,8 +202,8 @@ class DatabaseRepo extends ParentRepo {
   @override
   Future<void> UpdatePrice({
     required int id,
-    required double price,
-    required double discount,
+    required int price,
+    required int discount,
   }) async {
     // ID exists ???
     List<Map<String, dynamic>> products = await database.query(
@@ -215,7 +215,7 @@ class DatabaseRepo extends ParentRepo {
     //  product exists====> update with discount
     if (products.isNotEmpty) {
       // Calculate the new price after applying the discount
-      double newPrice = price * (1 - (discount / 100));
+      int newPrice = (price * (1 - (discount / 100))) as int;
 
       // Update the product's price in the database
       await database.update(

@@ -59,21 +59,21 @@ class FirebaseRepo extends ParentRepo {
     required String model,
     required int storageCapacity,
     required String color,
-    required double price,
-    required double screenSize,
+    required int price,
+    required int screenSize,
     required int ramCapacity,
     required String processor,
     required String cameraResolution,
     required String os,
     required int year,
-    String availabilityState = 'In Stock',
-    bool favorite = false,
-    bool cart = false,
+    int availabilityState = 1,
+    int favorite = 0,
+    int cart = 0,
     String description = '''Here you can find all the information you need ''',
-    required Uint32List image,
-    Uint64List? video,
+    required Uint8List image,
+    Uint8List? video,
     required int quantity,
-    double? discount,
+    int? discount,
   }) async {
     CollectionReference products =
         FirebaseFirestore.instance.collection("products");
@@ -98,7 +98,7 @@ class FirebaseRepo extends ParentRepo {
   @override
   Future<void> UpdateProductState({
     required int id,
-    required String availabilityState,
+    required int availabilityState,
     required int quantity,
   }) async {
     await _database.update(
@@ -118,7 +118,7 @@ class FirebaseRepo extends ParentRepo {
     await DatabaseRepo.instance.then((DB) {
       DB.UpdateProductState(
         id: id,
-        availabilityState: quantity > 0 ? 'In Stock' : 'Out of Stock',
+        availabilityState: quantity > 0 ? 1 : 0,
         quantity: quantity,
       );
     });
@@ -128,7 +128,7 @@ class FirebaseRepo extends ParentRepo {
   @override
   Future<void> UpdateCart({
     required int id,
-    required bool cart,
+    required int cart,
   }) async {
     await _database.update(
       'MobilePhones',
@@ -144,7 +144,7 @@ class FirebaseRepo extends ParentRepo {
   @override
   Future<void> UpdateFavorite({
     required int id,
-    required bool favorite,
+    required int favorite,
   }) async {
     await _database.update(
       'MobilePhones',
@@ -160,8 +160,8 @@ class FirebaseRepo extends ParentRepo {
   @override
   Future<void> UpdatePrice({
     required int id,
-    required double price,
-    required double discount,
+    required int price,
+    required int discount,
   }) async {
     // Check if the product with the specified ID exists
     List<Map<String, dynamic>> products = await _database.query(

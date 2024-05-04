@@ -2,19 +2,14 @@ import 'dart:developer';
 import 'dart:ffi';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
+
 class ProductModel {
   int? Id, RamCapacity, Quantity, StorageCapacity, Year;
-  Double? Price, Screen_size, Discount;
-  String? Brand,
-      Model,
-      Color,
-      Processor,
-      CameraResolution,
-      OS,
-      AvailabilityState,
-      Description;
-  Uint32List? Image, Video;
-  bool? Favorite, Cart;
+  int? Price, Screen_size, Discount;
+  String? Brand, Model, Color, Processor, CameraResolution, OS, Description;
+  Uint8List? Image, Video;
+  int? Favorite, Cart, AvailabilityState;
 
   ProductModel(
       {this.Id,

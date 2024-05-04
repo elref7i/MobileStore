@@ -31,7 +31,7 @@ class ProductItemWidget extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(25),
                     child: Image.memory(
-                      (productModel.Image ?? Uint8List(5)) as Uint8List,
+                      (productModel.Image ?? Uint8List(10)),
                       height: 50,
                       width: 50,
                       fit: BoxFit.fill,
@@ -53,7 +53,10 @@ class ProductItemWidget extends StatelessWidget {
                       ),
                       Text(
                         productModel.Model ?? 'S Series',
-                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
+                        style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey),
                       ),
                     ],
                   ),
@@ -84,13 +87,13 @@ class ProductItemWidget extends StatelessWidget {
                   InkWell(
                     child: productModel.Favorite == 1
                         ? const Icon(
-                      CupertinoIcons.heart_fill,
-                      color: Colors.red,
-                    )
+                            CupertinoIcons.heart_fill,
+                            color: Colors.red,
+                          )
                         : const Icon(
-                      CupertinoIcons.heart,
-                      color: Colors.red,
-                    ),
+                            CupertinoIcons.heart,
+                            color: Colors.red,
+                          ),
                     onTap: () {
                       if (productModel.Favorite == 1) {
                         controller.addToFavourite(productModel.Id ?? 0, false);
@@ -111,13 +114,13 @@ class ProductItemWidget extends StatelessWidget {
                   InkWell(
                     child: productModel.Cart == true
                         ? const Icon(
-                      CupertinoIcons.cart,
-                      color: Colors.blue,
-                    )
+                            CupertinoIcons.cart,
+                            color: Colors.blue,
+                          )
                         : const Icon(
-                      CupertinoIcons.cart,
-                      color: Colors.blue,
-                    ),
+                            CupertinoIcons.cart,
+                            color: Colors.blue,
+                          ),
                     onTap: () {},
                   ),
                 ],

@@ -8,21 +8,21 @@ abstract class ParentRepo {
     required String model,
     required int storageCapacity,
     required String color,
-    required double price,
-    required double screenSize,
+    required int price,
+    required int screenSize,
     required int ramCapacity,
     required String processor,
     required String cameraResolution,
     required String os,
     required int year,
-    String availabilityState = 'In Stock',
-    bool favorite = false,
-    bool cart = false,
+    int availabilityState = 1,
+    int favorite = 0,
+    int cart = 0,
     String description = '''Here you can find all the information you need ''',
-    required Uint32List image,
-    Uint64List? video,
+    required Uint8List image,
+    Uint8List? video,
     required int quantity,
-    double? discount,
+    int? discount,
   });
 
   Future<List<ProductModel>> fetch();
@@ -32,7 +32,7 @@ abstract class ParentRepo {
   // Update Product quantity and availabilityState in MobilePhones Table
   Future<void> UpdateProductState({
     required int id,
-    required String availabilityState,
+    required int availabilityState,
     required int quantity,
   });
 
@@ -42,19 +42,19 @@ abstract class ParentRepo {
   // Update record for specified ID adding the product to Cart Products
   Future<void> UpdateCart({
     required int id,
-    required bool cart,
+    required int cart,
   });
   // Update record for specified ID adding the product to Favorite Products
   Future<void> UpdateFavorite({
     required int id,
-    required bool favorite,
+    required int favorite,
   });
 
   // Update Product price using discount in MobilePhones Table
   Future<void> UpdatePrice({
     required int id,
-    required double price,
-    required double discount,
+    required int price,
+    required int discount,
   });
 }
 
