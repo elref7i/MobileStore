@@ -6,65 +6,61 @@ import 'package:mobile_app/widgets/custom_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key});
-
-  //   final List<String> names = <String>[
-  //   'men',
-  //   's',
-  //   's',
-  //   's',
-  //   's',
-  //   's',
-  //   's',
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-        child: Column(
-          children: [
-            Search(),
-            SizedBox(
-              height: 50,
-            ),
-            CustomText(
-              text: "Categories",
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ListViewCateg(),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(
-                  text: "Best Selling",
-                  fontSize: 18,
-                ),
-                CustomText(
-                  text: "See All",
-                  fontSize: 18,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ListViewProduct(),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+          child: Column(
+            children: [
+              Search(),
+              SizedBox(
+                height: 30,
+              ),
+              CustomText(
+                text: "Categories",
+                color: Colors.black,
+                fontSize: 20,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ListViewCateg(),
+              SizedBox(
+                height: 70,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    text: "Best Selling",
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                  CustomText(
+                    text: "See All",
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              ListViewProduct(),
+              // Spacer(
+              //   flex: 1,
+              // ),
+            ],
+          ),
+          // Row(
+          //   children: [],
+          // ),
         ),
-        // Row(
-        //   children: [],
-        // ),
       ),
     );
   }
-
-
 
   Widget ListViewCateg() {
     return Container(
@@ -78,35 +74,36 @@ class HomeScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-                  color: Colors.grey.shade100,
+                  color: ccolor.gray2,
                 ),
                 height: 60,
                 width: 60,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(7.0),
                   child: Image.asset("assets/images/AirPods-Pro.png"),
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               CustomText(
-                text: "Categories",
+                text: "AIR",
+                fontSize: 20,
               ),
             ],
           );
         },
         separatorBuilder: (context, index) => SizedBox(
-          width: 20,
+          width: 10,
         ),
-        itemCount: 3,
+        itemCount: 20,
       ),
     );
   }
 
   Widget ListViewProduct() {
     return Container(
-      height: 200,
+      height: 350,
       child: ListView.separated(
         //itemCount: names.length,
         scrollDirection: Axis.horizontal,
@@ -114,22 +111,27 @@ class HomeScreen extends StatelessWidget {
           return Container(
             width: context.width * .4,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Color.fromARGB(255, 193, 193, 193)),
+              borderRadius: BorderRadius.circular(5),
+              color: const Color.fromARGB(255, 255, 255, 255),
+            ),
             child: Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(10),
+                    color: ccolor.gray2,
                   ),
-                  width: context.width * .4,
+                  width: context.width * 4,
                   child: Container(
-                      height: 130,
-                      child: Image.asset("assets/images/AirPods-Pro.png",fit: BoxFit.fill,),),
+                    height: 180,
+                    child: Image.asset(
+                      "assets/images/AirPods-Pro.png",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
                 CustomText(
                   text: "product1",
@@ -137,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                   fontSize: 20,
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 CustomText(
                   text: "product1",
@@ -145,13 +147,14 @@ class HomeScreen extends StatelessWidget {
                   fontSize: 15,
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 CustomText(
-                  text: "price",
-                  alignment: Alignment.bottomLeft,
-                  fontSize: 15,
-                )
+                  text: "\$700",
+                  alignment: Alignment.bottomRight,
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 8, 169, 8),
+                ),
               ],
             ),
           );

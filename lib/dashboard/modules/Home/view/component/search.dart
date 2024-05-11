@@ -8,7 +8,7 @@ class Search extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.grey.shade300,
+        color: Colors.grey.shade200,
       ),
       child: TextFormField(
         decoration: InputDecoration(
