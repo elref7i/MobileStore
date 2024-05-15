@@ -1,5 +1,6 @@
+// ignore_for_file: unused_import
+
 import 'dart:developer';
-import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';

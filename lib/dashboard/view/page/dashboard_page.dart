@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app/dashboard/controller/cubit/dashboard_cubit.dart';
 import 'package:mobile_app/dashboard/modules/Cart/View/cart_page.dart';
 import 'package:mobile_app/dashboard/modules/Home/view/home_page.dart';
+import 'package:mobile_app/dashboard/modules/users/profile/profile_screen.dart';
 import 'package:mobile_app/utils/colors/colors_constant.dart';
 import '../../modules/users/view/page/Product_page.dart';
 
@@ -34,11 +34,11 @@ class DashboardPage extends StatelessWidget {
             body: PageView(
               controller: controller.pageController,
               onPageChanged: controller.onChangeTabIndex,
-              children: const [
+              children: [
                 HomeScreen(),
                 ProductPage(),
                 CartScreen(),
-                Text("Profile"),
+                ProfileScreen(),
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(

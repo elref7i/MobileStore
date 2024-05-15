@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -17,24 +15,21 @@ class MyFirebase {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   }
 
-
-
-Future<String> serverUrl() async {
-  String value = "";
-  try{
-    final FirebaseRemoteConfig remoteConfig=FirebaseRemoteConfig.instance;
-  await remoteConfig.fetchAndActivate() ;
-  await remoteConfig.setConfigSettings(
-    RemoteConfigSettings(
-    fetchTimeout: const Duration(seconds: 1),
-    minimumFetchInterval:const Duration(seconds: 1),
-  ),
-  );
-  value=remoteConfig.getString("key");
-}
-  catch(e){
-    value="";
-}
-return value;
-}
+  Future<String> serverUrl() async {
+    String value = "";
+    try {
+      final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
+      await remoteConfig.fetchAndActivate();
+      await remoteConfig.setConfigSettings(
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(seconds: 1),
+          minimumFetchInterval: const Duration(seconds: 1),
+        ),
+      );
+      value = remoteConfig.getString("key");
+    } catch (e) {
+      value = "";
+    }
+    return value;
+  }
 }

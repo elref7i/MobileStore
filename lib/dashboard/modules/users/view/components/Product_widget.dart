@@ -18,9 +18,10 @@ class ProductItemWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.grey, width: 0.5),
-            borderRadius: BorderRadius.circular(20)),
+          color: Colors.white,
+          border: Border.all(color: Colors.grey, width: 0.5),
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -98,10 +99,12 @@ class ProductItemWidget extends StatelessWidget {
                         ? const Icon(
                             CupertinoIcons.heart_fill,
                             color: Colors.red,
+                            size: 35,
                           )
                         : const Icon(
                             CupertinoIcons.heart,
                             color: Colors.red,
+                            size: 35,
                           ),
                     onTap: () {
                       if (productModel.Favorite == 1) {
@@ -125,10 +128,12 @@ class ProductItemWidget extends StatelessWidget {
                         ? const Icon(
                             CupertinoIcons.cart,
                             color: Colors.blue,
+                            size: 35,
                           )
                         : const Icon(
-                            CupertinoIcons.cart,
-                            color: Colors.red,
+                            CupertinoIcons.cart_fill,
+                            color: Colors.blue,
+                            size: 35,
                           ),
                     onTap: () {
                       if (productModel.Cart == 1) {

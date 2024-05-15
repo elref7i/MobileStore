@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/utils/colors/colors_constant.dart';
-import 'package:mobile_app/widgets/custom_button.dart';
 import 'package:mobile_app/widgets/custom_text.dart';
 
 class CartScreen extends StatelessWidget {
@@ -35,7 +34,7 @@ class CartScreen extends StatelessWidget {
                               children: [
                                 CustomText(
                                   fontSize: 20,
-                                  text: "Product One",
+                                  text: "Power Bank",
                                 ),
                                 SizedBox(
                                   height: 15,
@@ -117,7 +116,7 @@ class CartScreen extends StatelessWidget {
                         height: 15,
                       ),
                       CustomText(
-                        text: "\$2000",
+                        text: "\$800",
                         fontSize: 18,
                         color: Color.fromARGB(255, 8, 169, 8),
                       ),
@@ -132,7 +131,7 @@ class CartScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green, // Change the color here
+                      backgroundColor: Colors.green,
                     ),
                   ),
                 ],

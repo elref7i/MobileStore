@@ -52,6 +52,7 @@ dependencies:
   path: ^1.9.0
   firebase_crashlytics: ^3.5.4
   firebase_remote_config: ^4.4.4
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -99,15 +100,19 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/Camera_Icon.svg
+    - assets/icons/User_Icon.svg
+    - assets/icons/Settings.svg
+    - assets/icons/Question_mark.svg
+    - assets/icons/Log_out.svg
+    - assets/icons/Bell.svg
     - assets/images/AirPods-Pro.png
     - assets/images/OppoReno.png
     - assets/images/Beats.png
     - assets/images/Portable.png
     - assets/images/logo.png
     - assets/images/mobilegif.gif
-    - assets/images/animation_shop.jpeg
-    - assets/images/Animation1.gif
-    - assets/images/Animation2.gif
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

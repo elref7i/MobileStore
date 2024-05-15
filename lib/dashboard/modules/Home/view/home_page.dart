@@ -49,14 +49,8 @@ class HomeScreen extends StatelessWidget {
                 height: 30,
               ),
               ListViewProduct(),
-              // Spacer(
-              //   flex: 1,
-              // ),
             ],
           ),
-          // Row(
-          //   children: [],
-          // ),
         ),
       ),
     );
@@ -134,7 +128,7 @@ class HomeScreen extends StatelessWidget {
                   height: 15,
                 ),
                 CustomText(
-                  text: "product1",
+                  text: "Soundcore",
                   alignment: Alignment.bottomLeft,
                   fontSize: 20,
                 ),
@@ -142,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                   height: 10,
                 ),
                 CustomText(
-                  text: "product1",
+                  text: "Life P2i",
                   alignment: Alignment.bottomLeft,
                   fontSize: 15,
                 ),
