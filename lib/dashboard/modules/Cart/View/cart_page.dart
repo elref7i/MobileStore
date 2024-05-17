@@ -57,7 +57,7 @@ class CartScreen extends StatelessWidget {
                 );
               },
               child: Container(
-                color: Colors.yellow.shade600,
+                color: Color.fromARGB(255, 15, 237, 82),
                 alignment: Alignment.center,
                 height: 50.0,
                 child: const Text(
