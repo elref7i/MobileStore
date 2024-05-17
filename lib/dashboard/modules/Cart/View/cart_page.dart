@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_cubit.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_state.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Model/cart_model.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartScreen extends StatelessWidget {
@@ -15,31 +15,6 @@ class CartScreen extends StatelessWidget {
       child: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           return Scaffold(
-            // appBar: AppBar(
-            //   centerTitle: true,
-            //   // title: const Text('My Shopping Cart'),
-            //   // actions: [
-            //   //   badges.Badge(
-            //   //     badgeContent: BlocBuilder<CartCubit, CartState>(
-            //   //       builder: (context, state) {
-            //   //         return Text(
-            //   //           state.counter.toString(),
-            //   //           style: const TextStyle(
-            //   //             color: Colors.white,
-            //   //             fontWeight: FontWeight.bold,
-            //   //           ),
-            //   //         );
-            //   //       },
-            //   //     ),
-            //   //     position: badges.BadgePosition.topEnd(top: 30, end: 30),
-            //   //     child: IconButton(
-            //   //       onPressed: () {},
-            //   //       icon: const Icon(Icons.shopping_cart),
-            //   //     ),
-            //   //   ),
-            //   //   const SizedBox(width: 20.0),
-            //   // ],
-            // ),
             body: Column(
               children: [
                 Expanded(
@@ -49,15 +24,18 @@ class CartScreen extends StatelessWidget {
             ),
             bottomNavigationBar: InkWell(
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Payment Successful'),
-                    duration: Duration(seconds: 2),
-                  ),
+                Fluttertoast.showToast(
+                  msg: "Payment Successful",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 2,
+                  backgroundColor: const Color.fromARGB(255, 15, 237, 82),
+                  textColor: Colors.black,
+                  fontSize: 16.0,
                 );
               },
               child: Container(
-                color: Color.fromARGB(255, 15, 237, 82),
+                color: const Color.fromARGB(255, 15, 237, 82),
                 alignment: Alignment.center,
                 height: 50.0,
                 child: const Text(
@@ -94,20 +72,19 @@ class CartScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image(
-                    height: 80,
-                    width: 80,
+                    height: 100,
+                    width: 70,
                     image: MemoryImage(cart[index].image!),
                   ),
-                  SizedBox(
-                    width: 130,
+                  const SizedBox(width: 8.0),
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 5.0),
                         RichText(
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
@@ -128,6 +105,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ),
                         RichText(
+                          overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           text: TextSpan(
                             text: 'Price: ' r"$",
@@ -191,12 +169,12 @@ class PlusMinusButtons extends StatelessWidget {
   final VoidCallback deleteQuantity;
   final VoidCallback addQuantity;
   final String text;
-  const PlusMinusButtons(
-      {Key? key,
-      required this.addQuantity,
-      required this.deleteQuantity,
-      required this.text})
-      : super(key: key);
+  const PlusMinusButtons({
+    Key? key,
+    required this.addQuantity,
+    required this.deleteQuantity,
+    required this.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +190,8 @@ class PlusMinusButtons extends StatelessWidget {
 
 class ReusableWidget extends StatelessWidget {
   final String title, value;
-  const ReusableWidget({Key? key, required this.title, required this.value});
+  const ReusableWidget({Key? key, required this.title, required this.value})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -234,7 +213,6 @@ class ReusableWidget extends StatelessWidget {
     );
   }
 }
-
 // class CartScreen extends StatelessWidget {
 //   const CartScreen({Key? key});
 
