@@ -29,10 +29,6 @@ class UserPage extends StatelessWidget {
                             crossAxisCount: 1,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10),
-                        // separatorBuilder: (_, int index) => const Divider(
-                        //       height: 1,
-                        //       thickness: 5,
-                        //     ),
                         itemCount: controller.products.length,
                         itemBuilder: (_, int index) {
                           return ProductItemWidget(

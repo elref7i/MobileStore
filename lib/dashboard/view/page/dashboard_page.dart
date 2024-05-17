@@ -7,9 +7,15 @@ import 'package:mobile_app/dashboard/modules/Home/view/home_page.dart';
 import 'package:mobile_app/dashboard/modules/users/profile/profile_screen.dart';
 import 'package:mobile_app/utils/colors/colors_constant.dart';
 import '../../modules/users/view/page/Product_page.dart';
+import 'package:badges/badges.dart' as badges;
 
 class DashboardPage extends StatelessWidget {
-  final List<String> titles = const ['Home', 'Products', 'Cart', 'Profile'];
+  final List<String> titles = const [
+    'Home',
+    'Products',
+    'My Shopping Cart',
+    'Profile'
+  ];
   const DashboardPage({super.key});
 
   @override
@@ -24,11 +30,22 @@ class DashboardPage extends StatelessWidget {
               backgroundColor: ccolor.gray2,
               title: Text(titles[controller.selectedTapIndex]),
               actions: [
-                IconButton(
+                badges.Badge(
+                  badgeContent: Text(
+                    '4',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  position: badges.BadgePosition.topEnd(top: 30, end: 30),
+                  child: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'registration');
+                      controller.onChangeTabIndex(2);
                     },
-                    icon: Icon(CupertinoIcons.add))
+                    icon: const Icon(Icons.shopping_cart),
+                  ),
+                ),
               ],
             ),
             body: PageView(

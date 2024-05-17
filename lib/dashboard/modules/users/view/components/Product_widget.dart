@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_cubit.dart';
 import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import '../../../products/controller/Product_cubit.dart';
 
 class ProductItemWidget extends StatelessWidget {
-  const ProductItemWidget({
-    super.key,
-    required this.productModel,
-    required this.controller,
-  });
+  ProductItemWidget(
+      {super.key,
+      required this.productModel,
+      required this.controller,
+      required this.products});
   final ProductModel productModel;
   final ProductCubit controller;
+  final List<ProductModel> products;
+  final CartCubit controllerCart = CartCubit();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,12 +45,9 @@ class ProductItemWidget extends StatelessWidget {
                       ),
                     )
                   else
-                    Icon(
-                      CupertinoIcons.cube_box_fill,
-                      size: 50,
-                      color: Colors.blue.withAlpha(150),
-                    ),
-                  SizedBox(
+                    Image.asset("assets/phone-image/samsungZfold.jpg",
+                        height: 130, width: 100, fit: BoxFit.fill),
+                  const SizedBox(
                     width: 10,
                   ),
                   Column(
@@ -107,10 +107,15 @@ class ProductItemWidget extends StatelessWidget {
                             size: 35,
                           ),
                     onTap: () {
+                      ////// solve ya omar
                       if (productModel.Favorite == 1) {
                         controller.addToFavourite(productModel.Id ?? 1, 0);
+                        // controllerCart.saveData(
+                        //     products, productModel.Id! - 1 ?? 0);
                       } else {
                         controller.addToFavourite(productModel.Id ?? 1, 1);
+                        // controllerCart.saveData(
+                        //     products, productModel.Id! - 1 ?? 0);
                       }
                     },
                   ),
@@ -126,20 +131,24 @@ class ProductItemWidget extends StatelessWidget {
                   InkWell(
                     child: productModel.Cart == 1
                         ? const Icon(
-                            CupertinoIcons.cart,
+                            CupertinoIcons.cart_fill,
                             color: Colors.blue,
                             size: 35,
                           )
                         : const Icon(
-                            CupertinoIcons.cart_fill,
+                            CupertinoIcons.cart,
                             color: Colors.blue,
                             size: 35,
                           ),
                     onTap: () {
                       if (productModel.Cart == 1) {
                         controller.addToCart(productModel.Id ?? 1, 0);
+                        controllerCart.saveData(
+                            products, productModel.Id! - 1 ?? 0);
                       } else {
                         controller.addToCart(productModel.Id ?? 1, 1);
+                        controllerCart.saveData(
+                            products, productModel.Id! - 1 ?? 0);
                       }
                     },
                   ),

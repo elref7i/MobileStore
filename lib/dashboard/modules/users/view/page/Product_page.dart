@@ -29,6 +29,7 @@ class ProductPage extends StatelessWidget {
                         itemBuilder: (_, int index) => ProductItemWidget(
                           productModel: controller.products[index],
                           controller: controller,
+                          products: controller.products,
                         ),
                         itemCount: controller.products.length,
                       ),

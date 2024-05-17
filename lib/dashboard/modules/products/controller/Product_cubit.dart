@@ -12,7 +12,6 @@ part 'Product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   static ProductCubit instance = ProductCubit();
-
   ProductCubit() : super(ProductStateLoading()) {
     init();
   }
@@ -46,14 +45,12 @@ class ProductCubit extends Cubit<ProductState> {
   Future<void> addToCart(int id, int state) async {
     log(id.toString());
     await (await DatabaseRepo.instance).UpdateCart(id, state);
-    init();
     emit(ProductStateLoaded());
   }
 
   Future<void> addToFavourite(int id, int state) async {
     log(id.toString());
     await (await DatabaseRepo.instance).UpdateFavorite(id, state);
-    init();
     emit(ProductStateLoaded());
   }
 }

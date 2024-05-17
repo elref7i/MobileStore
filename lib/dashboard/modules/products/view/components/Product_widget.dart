@@ -4,6 +4,7 @@ import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_mo
 class ProductItemWidget extends StatelessWidget {
   const ProductItemWidget({super.key, required this.mobilePhones});
   final ProductModel mobilePhones;
+
   @override
   Widget build(BuildContext context) {
     return ColoredBox(

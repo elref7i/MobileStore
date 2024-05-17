@@ -10,7 +10,7 @@ class LoginCubit extends Cubit<LoginState> {
   final formKey = GlobalKey<FormState>();
   void onPressedLogin(BuildContext context) {
     if (formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, 'dashboard');
+      Navigator.pushNamedAndRemoveUntil(context, 'dashboard', (route) => false);
     } else {
       log("Invalid Input");
     }

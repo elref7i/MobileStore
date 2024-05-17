@@ -34,6 +34,37 @@ class FirebaseRepo extends ParentRepo {
     });
   }
 
+  /////////////////++++++++++++++++++++++++++++++++
+  // static Future addProductToCart({
+  //   required BuildContext context,
+  //   required UserProductModel productModel,
+  // }) async {
+  //   try {
+  //     await FirebaseFirestore.instance
+  //         .collection('Cart')
+  //         .doc(auth.currentUser!.phoneNumber)
+  //         .collection('myCart')
+  //         .where('productID', isEqualTo: productModel.productID)
+  //         .get()
+  //         .then((value) async {
+  //       if (value.size < 1) {
+  //         await FirebaseFirestore.instance
+  //             .collection('Cart')
+  //             .doc(auth.currentUser!.phoneNumber)
+  //             .collection('myCart')
+  //             .doc(productModel.productID)
+  //             .set(productModel.toMap())
+  //             .whenComplete(() {
+  //           log('Data Added');
+  //         });
+  //       }
+  //     });
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  // }
+////////////////////////////////////////////////////////////////
+
   @override
   Future<void> delete({required int ID}) async {
     CollectionReference products =
