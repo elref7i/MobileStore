@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:typed_data';
 import 'package:mobile_app/dashboard/modules/Cart/Model/cart_model.dart';
 import 'package:sqflite/sqflite.dart';
 
