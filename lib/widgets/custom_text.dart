@@ -28,11 +28,7 @@ class CustomText extends StatelessWidget {
       alignment: alignment,
       child: Text(
         text,
-        style: TextStyle(
-          color: color,
-          height: height,
-          fontSize: fontSize,
-        ),
+        style: Theme.of(context).textTheme.bodyLarge,
         // maxLines: maxLine,
       ),
     );

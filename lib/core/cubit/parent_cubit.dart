@@ -9,13 +9,14 @@ part 'parent_state.dart';
 
 class ParentCubit extends Cubit<ParentState> {
   static final ParentCubit instance = ParentCubit();
-  ThemeMode themeMode = ThemeMode.light;
+  ThemeMode themeMode = ThemeMode.dark;
+  String lang = "en";
   ParentCubit() : super(ParentInitial()) {
     loadLanguage();
   }
   Map<String, dynamic> local = {};
-  String lang = "ar";
-  Future<void> loadLanguage({String lang = "ar"}) async {
+
+  Future<void> loadLanguage() async {
     String s = await rootBundle.loadString("assets/lang/$lang.json");
     local = json.decode(s);
     emit(ParentInitial());
@@ -34,7 +35,7 @@ class ParentCubit extends Cubit<ParentState> {
     if (lang == 'ar') {
       lang = "en";
     } else {
-      lang = "en";
+      lang = "ar";
     }
     loadLanguage();
     emit(ParentInitial());
