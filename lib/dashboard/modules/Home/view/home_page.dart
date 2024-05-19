@@ -106,14 +106,14 @@ class HomeScreen extends StatelessWidget {
             width: context.width * .4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: const Color.fromARGB(255, 255, 255, 255),
+             // color: Color.fromARGB(255, 175, 173, 173),
             ),
             child: Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: ccolor.gray2,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   width: context.width * 4,
                   child: Container(
@@ -147,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                   text: "\$700",
                   alignment: Alignment.bottomRight,
                   fontSize: 18,
-                  color: Color.fromARGB(255, 8, 169, 8),
+                  color: Color.fromARGB(255, 22, 86, 159),
                 ),
               ],
             ),

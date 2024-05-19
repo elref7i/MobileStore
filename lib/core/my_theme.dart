@@ -5,12 +5,13 @@ class MyTheme {
   static final MyTheme Instance = MyTheme();
   ThemeData light = ThemeData.light(useMaterial3: true).copyWith(
       colorScheme: ColorScheme.light(
-        background: Color.fromARGB(255, 97, 97, 97),
+        background: Color.fromARGB(255, 255, 255, 255),
       ),
+      appBarTheme: AppBarTheme(backgroundColor: Color.fromARGB(255, 127, 158, 238)),
       textTheme: TextTheme(
         displayLarge: TextStyle(
           fontSize: 22,
-          color: Color.fromARGB(255, 23, 48, 148),
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
         bodyLarge: TextStyle(
           fontSize: 18,
@@ -19,7 +20,7 @@ class MyTheme {
         ),
         labelLarge: TextStyle(
           fontSize: 16,
-          color: Color.fromARGB(255, 93, 109, 173),
+          color: Color.fromARGB(255, 54, 73, 150),
         ),
       ));
   ThemeData dark = ThemeData.dark().copyWith(
@@ -29,19 +30,17 @@ class MyTheme {
     textTheme: TextTheme(
       displayLarge: TextStyle(
         fontSize: 22,
-        color: Color.fromARGB(255, 78, 77, 78),
-        
+        color: Color.fromARGB(255, 255, 255, 255),
       ),
       bodyLarge: TextStyle(
         fontSize: 18,
-        color: Color.fromARGB(255, 228, 228, 235),
+        color: Color.fromARGB(255, 255, 255, 255),
         fontWeight: FontWeight.w600,
       ),
       labelLarge: TextStyle(
         fontSize: 16,
-        color: Color.fromARGB(255, 35, 60, 171),
+        color: Color.fromARGB(255, 51, 67, 137),
       ),
     ),
   );
-  
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mobile_app/core/cubit/parent_cubit.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_cubit.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_state.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Model/cart_model.dart';
@@ -29,13 +30,13 @@ class CartScreen extends StatelessWidget {
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.CENTER,
                   timeInSecForIosWeb: 2,
-                  backgroundColor: const Color.fromARGB(255, 15, 237, 82),
+                  backgroundColor: Color.fromARGB(255, 26, 63, 144),
                   textColor: Colors.black,
                   fontSize: 16.0,
                 );
               },
               child: Container(
-                color: const Color.fromARGB(255, 15, 237, 82),
+                color: Color.fromARGB(255, 45, 93, 171),
                 alignment: Alignment.center,
                 height: 50.0,
                 child: const Text(
@@ -55,10 +56,17 @@ class CartScreen extends StatelessWidget {
 
   Widget _buildCartList(List<Cart> cart) {
     if (cart.isEmpty) {
-      return const Center(
-        child: Text(
-          'Your Cart is Empty',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+      return Center(
+        child: BlocProvider(
+          create: (context) => ParentCubit(),
+          child: BlocBuilder<ParentCubit, ParentState>(
+            builder: (context, state) {
+              return Text(
+                'Your Cart is Empty',
+                style: Theme.of(context).textTheme.bodyLarge,
+              );
+            },
+          ),
         ),
       );
     } else {
@@ -90,10 +98,11 @@ class CartScreen extends StatelessWidget {
                           maxLines: 1,
                           text: TextSpan(
                             text: 'Name: ',
-                            style: TextStyle(
-                              color: Colors.blueGrey.shade800,
-                              fontSize: 16.0,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge ??
+                                TextStyle(
+                                  color: Colors.blueGrey.shade800,
+                                  fontSize: 16.0,
+                                ),
                             children: [
                               TextSpan(
                                 text: '${cart[index].productName!}\n',
@@ -152,7 +161,7 @@ class CartScreen extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.delete,
-                      color: Colors.red.shade800,
+                      color: Color.fromARGB(255, 32, 77, 155),
                     ),
                   ),
                 ],

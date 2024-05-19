@@ -12,11 +12,11 @@ import '../../modules/users/view/page/Product_page.dart';
 import 'package:badges/badges.dart' as badges;
 
 class DashboardPage extends StatelessWidget {
-  final List<String> titles =  [
+  final List<String> titles = [
     'home_page_tittle'.tr,
     "item_page_title".tr,
     "cart_page_title".tr,
-    'Profile'
+    "Profile",
   ];
   DashboardPage({super.key});
 
@@ -28,10 +28,10 @@ class DashboardPage extends StatelessWidget {
         builder: (context, state) {
           DashboardController controller = context.read<DashboardController>();
           final themeMode = ParentCubit.instance.themeMode;
-          final langg= ParentCubit.instance.lang;
+          final langg = ParentCubit.instance.lang;
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: ccolor.gray2,
+             // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
               title: Text(
                 titles[controller.selectedTapIndex],
                 style: Theme.of(context).textTheme.displayLarge,
@@ -42,19 +42,26 @@ class DashboardPage extends StatelessWidget {
                     ParentCubit.instance.chageMode();
                   },
                   icon: Icon(
-                  themeMode == ThemeMode.dark ? Icons.wb_sunny : Icons.nights_stay,
-                  color: themeMode == ThemeMode.dark ? Colors.amber : Colors.blue,
-                ),
+                    themeMode == ThemeMode.dark
+                        ? Icons.wb_sunny
+                        : Icons.nights_stay,
+                    color: themeMode == ThemeMode.dark
+                        ? Colors.amber
+                        : const Color.fromARGB(255, 0, 53, 96),
+                  ),
                 ),
                 IconButton(
-                onPressed: () {
-                  ParentCubit.instance.changeLang();
-                },
-                icon: Icon(
-                  Icons.language_outlined , // يمكنك استخدام أيقونة أخرى إن أردت
-                  color: langg=="ar" ? Color.fromARGB(255, 98, 100, 212) : Colors.blue,
-                ),
-                tooltip: langg=="ar" ? 'ar' : 'en',
+                  onPressed: () {
+                    ParentCubit.instance.changeLang();
+                  },
+                  icon: Icon(
+                    Icons
+                        .language_outlined, // يمكنك استخدام أيقونة أخرى إن أردت
+                    color: langg == "ar"
+                        ? Color.fromARGB(255, 2, 105, 89)
+                        : const Color.fromARGB(255, 1, 57, 104),
+                  ),
+                  tooltip: langg == "ar" ? 'ar' : 'en',
                 ),
                 badges.Badge(
                   badgeContent: Text(
@@ -71,11 +78,10 @@ class DashboardPage extends StatelessWidget {
                     },
                     icon: const Icon(
                       Icons.shopping_cart,
-                      color: Color.fromARGB(255, 14, 99, 120),
+                      color: Color.fromARGB(255, 116, 90, 227),
                     ),
                   ),
                 ),
-              
               ],
             ),
             body: PageView(
@@ -91,9 +97,9 @@ class DashboardPage extends StatelessWidget {
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: controller.selectedTapIndex,
               onTap: controller.onChangeTabIndex,
-              unselectedItemColor: Color.fromARGB(255, 0, 0, 0),
+              unselectedItemColor: Color.fromARGB(255, 8, 103, 159),
               backgroundColor: ccolor.gray2,
-              fixedColor: Color.fromARGB(255, 6, 152, 188),
+              fixedColor: Color.fromARGB(255, 144, 134, 141),
               showSelectedLabels: true,
               unselectedLabelStyle: const TextStyle(
                   fontSize: 15, color: Color.fromARGB(255, 211, 18, 18)),
