@@ -1,236 +1,124 @@
-import 'dart:typed_data';
-import 'dart:developer';
-import 'package:mobile_app/dashboard/modules/users/model/repo/parent.dart';
 import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseRepo extends ParentRepo {
-  DatabaseRepo._init();
-  static DatabaseRepo? _singletoneObject;
-  // take object from DB Class
-  static late Database database;
+class DatabaseRepo {
+  Database? database;
 
-  static Future<DatabaseRepo> get instance async {
-    if (_singletoneObject == null) {
-      await _initDatabase();
-      _singletoneObject = DatabaseRepo._init();
+  Future<Database> initDB() async {
+    try {
+      String path = (await getDatabasesPath()) + "/products.db";
+      database = await openDatabase(
+        path,
+        version: 1,
+        onCreate: (db, version) {
+          return db.execute(
+            '''CREATE TABLE products(
+              id INTEGER PRIMARY KEY AUTOINCREMENT, 
+              brand TEXT,
+              model TEXT, 
+              storageCapacity INTEGER, 
+              color TEXT, 
+              price INTEGER, 
+              screenSize REAL, 
+              ramCapacity INTEGER, 
+              processor TEXT, 
+              cameraResolution TEXT, 
+              os TEXT, 
+              year INTEGER, 
+              image TEXT, 
+              quantity INTEGER, 
+              favorite INTEGER, 
+              cart INTEGER, 
+              availabilityState INTEGER
+            )'''
+          );
+        },
+      );
+      return database!;
+    } catch (e) {
+      print('Error initializing database: $e');
+      throw e;
     }
-    return _singletoneObject!;
   }
 
-  // Create Database
-  static Future<void> _initDatabase() async {
-    // Get the path of the database file
-    final String databasePath = await getDatabasesPath();
-    // add files to the database
-    final String path = databasePath + "/Store.db";
-
-    database = await openDatabase(
-      path,
-      version: 88,
-      onCreate: _createTables,
-    );
+  Future<List<ProductModel>> fetchProducts() async {
+    if (database == null) {
+      await initDB();
+    }
+    List<Map<String, dynamic>> maps = await database!.query('products');
+    return maps.map((e) => ProductModel.fromjson(e)).toList();
   }
 
-  static Future<void> _createTables(Database db, _) async {
-    await db.execute("""
-    CREATE TABLE MobilePhones (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Brand VARCHAR(50) NOT NULL,
-    Model VARCHAR(100) NOT NULL,
-    StorageCapacity INTEGER NOT NULL,
-    Color VARCHAR(50) ,
-    Price INTEGER(10, 2) NOT NULL,
-    Screen_size INTEGER(4, 2),
-    RamCapacity INTEGER,
-    Processor VARCHAR(100) NOT NULL DEFAULT '64MP',
-    CameraResolution VARCHAR(50),
-    OS VARCHAR(50) NOT NULL,
-    Year INTEGER,
-    AvailabilityState INTEGER DEFAULT 1,
-    Favorite INTEGER DEFAULT 0,
-    Cart INTEGER DEFAULT 0,
-    Description TEXT,
-    Image BLOB NOT NULL,
-    Video BLOB,
-    Quantity INTEGER,
-    Discount INTEGER(10, 2) DEFAULT 0.0
-  );
-    """);
+  Future<List<ProductModel>> fetchFavorites() async {
+    if (database == null) {
+      await initDB();
+    }
+    List<Map<String, dynamic>> maps = await database!.query('products', where: 'favorite = ?', whereArgs: [1]);
+    return maps.map((e) => ProductModel.fromjson(e)).toList();
   }
 
-  // insert Product to MobilePhones Table
-  @override
-  Future<void> insert({
+  Future<List<ProductModel>> fetchCart() async {
+    if (database == null) {
+      await initDB();
+    }
+    List<Map<String, dynamic>> maps = await database!.query('products', where: 'cart = ?', whereArgs: [1]);
+    return maps.map((e) => ProductModel.fromjson(e)).toList();
+  }
+
+  Future<void> insertProduct({
+    required int id,
+    required int storageCapacity,
+    required int price,
+    required int ramCapacity,
+    required int year,
+    required int quantity,
+    required int availabilityState,
     required String brand,
     required String model,
-    required int storageCapacity,
     required String color,
-    required int price,
-    required int screenSize,
-    required int ramCapacity,
     required String processor,
     required String cameraResolution,
     required String os,
-    required int year,
-    int availabilityState = 1,
-    int favorite = 0,
-    int cart = 0,
-    String description = '''Here you can find all the information you need ''',
-    required Uint8List image,
-    Uint8List? video,
-    required int quantity,
-    int? discount,
+    required String image,
+    required double screenSize,
+    required double discount,
   }) async {
-    await database.insert(
-      'MobilePhones',
-      {
-        'Brand': brand,
-        'Model': model,
-        'StorageCapacity': storageCapacity,
-        'Color': color,
-        'Price': price,
-        'Screen_size': screenSize,
-        'RamCapacity': ramCapacity,
-        'Processor': processor,
-        'CameraResolution': cameraResolution,
-        'OS': os,
-        'Year': year,
-        'AvailabilityState': availabilityState,
-        'Favorite': favorite,
-        'Cart': cart,
-        'Description': description,
-        'Image': image,
-        'Video': video,
-        'Quantity': quantity,
-        'Discount': discount,
-      },
-    );
-    log("insert in product_cubit file done");
-  }
-
-  // fetch Product from MobilePhones Table
-  @override
-  Future<List<ProductModel>> fetch() async {
-    log((await database.getVersion()).toString() + ' fetched product');
-    return (await database.query('MobilePhones'))
-        .map((e) => ProductModel.fromJson(e))
-        .toList();
-  }
-
-  Future<List<ProductModel>> fetchFavoriteProducts() async {
-    return (await database
-            .query('MobilePhones', where: 'Favorite=?', whereArgs: [1]))
-        .map((e) => ProductModel.fromJson(e))
-        .toList();
-  }
-
-  Future<List<ProductModel>> fetchCartProducts() async {
-    return (await database
-            .query('MobilePhones', where: 'Cart=?', whereArgs: [1]))
-        .map((e) => ProductModel.fromJson(e))
-        .toList();
-  }
-
-  @override
-  Future<void> delete({required Comparable<num> ID}) async {
-    await database.delete('MobilePhones', where: 'ID=?', whereArgs: [ID]);
-  }
-
-  @override
-  Future<void> UpdateProductState({
-    required int id,
-    required int availabilityState,
-    required int quantity,
-  }) async {
-    await database.update(
-      'MobilePhones',
-      {
-        'AvailabilityState': availabilityState,
-        'Quantity': quantity,
-      },
-      where: 'Id = ?',
-      whereArgs: [id],
-    );
-  }
-
-// Update record with specified ID and quantity BY calling updateProductState Method
-  @override
-  Future<void> UpdateQuantity({required int id, required int quantity}) async {
-    await DatabaseRepo.instance.then((DB) {
-      DB.UpdateProductState(
-        id: id,
-        availabilityState: quantity > 0 ? 1 : 0,
-        quantity: quantity,
-      );
+    if (database == null) {
+      await initDB();
+    }
+    await database!.insert('products', {
+      "id": id,
+      "storageCapacity": storageCapacity,
+      "price": price,
+      "ramCapacity": ramCapacity,
+      "year": year,
+      "quantity": quantity,
+      "favorite": 0,
+      "cart": 0,
+      "availabilityState": availabilityState,
+      "brand": brand,
+      "model": model,
+      "color": color,
+      "processor": processor,
+      "cameraResolution": cameraResolution,
+      "os": os,
+      "image": image,
+      "screenSize": screenSize,
+      "discount": discount,
     });
   }
 
-  // Update record by specified ID => adding the product to Cart Products
-  @override
-  Future<void> UpdateCart(
-    int id,
-    int cart,
-  ) async {
-    await database.update(
-      'MobilePhones',
-      {
-        'Cart': cart,
-      },
-      where: 'Id = ?',
-      whereArgs: [id],
-    );
-  }
-
-  // Update record by specified ID => adding the product to Favorite Products
-  @override
-  Future<void> UpdateFavorite(
-    int id,
-    int favorite,
-  ) async {
-    await database.update(
-      'MobilePhones',
-      {
-        'Favorite': favorite,
-      },
-      where: 'Id = ?',
-      whereArgs: [id],
-    );
-  }
-
-  // ==========Update Product price by discount in MobilePhones Table ========
-  @override
-  Future<void> UpdatePrice({
-    required int id,
-    required int price,
-    required int discount,
-  }) async {
-    // ID exists ???
-    List<Map<String, dynamic>> products = await database.query(
-      'MobilePhones',
-      where: 'Id = ?',
-      whereArgs: [id],
-    );
-
-    //  product exists====> update with discount
-    if (products.isNotEmpty) {
-      // Calculate the new price after applying the discount
-      int newPrice = (price * (1 - (discount / 100))) as int;
-
-      // Update the product's price in the database
-      await database.update(
-        'MobilePhones',
-        {
-          'Price': newPrice,
-        },
-        where: 'Id = ?',
-        whereArgs: [id],
-      );
-    } else {
-      // not exist !!! ===> notify User
-      print('Product with ID $id does not exist.');
-      //============>>notify for developer
-      log("Product with ID $id is not Found");
+  Future<void> updateCart(int id, int value) async {
+    if (database == null) {
+      await initDB();
     }
+    await database!.update('products', {'cart': value}, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<void> updateFavorite(int id, int value) async {
+    if (database == null) {
+      await initDB();
+    }
+    await database!.update('products', {'favorite': value}, where: 'id = ?', whereArgs: [id]);
   }
 }

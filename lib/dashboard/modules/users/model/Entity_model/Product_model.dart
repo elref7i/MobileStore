@@ -1,56 +1,37 @@
-import 'dart:developer';
-
-import 'package:flutter/foundation.dart';
+import 'package:mobile_app/dashboard/modules/users/model/repo/local_db_data.dart';
 
 class ProductModel {
-  int? Id, RamCapacity, Quantity, StorageCapacity, Year;
-  int? Price, Screen_size, Discount;
-  String? Brand, Model, Color, Processor, CameraResolution, OS, Description;
-  Uint8List? Image, Video;
-  int? Favorite, Cart, AvailabilityState;
+  int? id,
+      storageCapacity,
+      ramCapacity,
+      year,
+      quantity,
+      favorite,
+      cart,
+      availabilityState;
+  late int price;
 
-  ProductModel(
-      {this.Id,
-      this.Brand,
-      this.Model,
-      this.StorageCapacity,
-      this.Color,
-      this.Price,
-      this.Screen_size,
-      this.RamCapacity,
-      this.Processor,
-      this.CameraResolution,
-      this.OS,
-      this.AvailabilityState,
-      this.Favorite,
-      this.Cart,
-      this.Description,
-      this.Image,
-      this.Video,
-      this.Quantity,
-      this.Discount});
+  String? brand, model, color, processor, cameraResolution, os, image;
+  double? screenSize, discount;
 
-  ProductModel.fromJson(Map mp) {
-    log(mp.toString());
-    Id = mp['Id'];
-    Brand = mp['Brand'];
-    Model = mp['Model'];
-    StorageCapacity = mp['StorageCapacity'];
-    Color = mp['Color'];
-    Price = mp['Price'];
-    Screen_size = mp['Screen_size'];
-    RamCapacity = mp['RamCapacity'];
-    Processor = mp['Processor'];
-    CameraResolution = mp['CameraResolution'];
-    OS = mp['OS'];
-    AvailabilityState = mp['AvailabilityState'];
-    Favorite = mp['Favorite'];
-    Cart = mp['Cart'];
-    Description = mp['Description'];
-    Image = mp['Image'];
-    Video = mp['Video'];
-    Quantity = mp['Quantity'];
-    Discount = mp['Discount'];
-    Year = mp['Year'];
+  ProductModel.fromjson(Map<String, dynamic> map) {
+    id = map['id'];
+    brand = map['brand'];
+    model = map['model'];
+    storageCapacity = map['storageCapacity'];
+    color = map['color'];
+    price = map['price'];
+    screenSize = map['screenSize'];
+    ramCapacity = map['ramCapacity'];
+    processor = map['processor'];
+    cameraResolution = map['cameraResolution'];
+    os = map['os'];
+    year = map['year'];
+    image = map['image'];
+    quantity = map['quantity'];
+    discount = map['discount'];
+    favorite = map['favorite'];
+    cart = map['cart'];
+    availabilityState = map['availabilityState'];
   }
 }

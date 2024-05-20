@@ -2,12 +2,12 @@ import 'dart:typed_data';
 
 class Cart {
   int? id;
-  String productId;
-  String productName;
+  String? productId;
+  String? productName;
   late int initialPrice;
   late int productPrice;
   int quantity;
-  Uint8List? image;
+  String? image;
 
   Cart({
     this.id,
@@ -26,9 +26,7 @@ class Cart {
         initialPrice: json['initialPrice'] as int,
         productPrice: json['productPrice'] as int,
         quantity: json['quantity'] as int,
-        image: json['image'] != null
-            ? Uint8List.fromList(List<int>.from(json['image'] as List))
-            : null,
+        image: json['image'],
       );
 
   Map<String, dynamic> toMap() => {

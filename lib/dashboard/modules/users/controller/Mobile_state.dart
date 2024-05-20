@@ -1,10 +1,10 @@
-part of 'Mobile_cubit.dart';
+import 'package:mobile_app/dashboard/modules/users/controller/Mobile_cubit.dart';
 
-@immutable
-sealed class MobilePhonesState {}
+abstract class ProductState {}
 
-final class MobilePhonesLoading extends MobilePhonesState {}
+class ProductStateLoading extends ProductState {}
 
-final class MobilePhonesLoaded extends MobilePhonesState {}
+class ProductStateLoaded extends ProductState {}
 
-final class MobilePhonesEmpty extends MobilePhonesState {}
+
+class ProductStateEmpty extends ProductState {}

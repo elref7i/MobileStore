@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_state.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Model/cart_model.dart';
@@ -7,30 +9,43 @@ import 'package:mobile_app/dashboard/modules/users/model/repo/DBHelper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartCubit extends Cubit<CartState> {
-  DBHelper dbHelper = DBHelper();
+  final DBHelper dbHelper = DBHelper();
 
   CartCubit()
-      : super(CartState(cart: [], quantity: 1, counter: 0, totalPrice: 0));
+      : super(CartState(cart: [], quantity: 1, counter: 0, totalPrice: 0)) {
+    _getPrefsItems();
+  }
 
-  void saveData(List<ProductModel> products, int index) {
+  void saveData(List<ProductModel> products, int index) async {
+    final product = products[index];
     dbHelper
         .insert(
-      Cart(
-        id: index,
-        productId: index.toString(),
-        productName: products[index].Model.toString(),
-        initialPrice: products[index].Price ?? 100,
-        productPrice: products[index].Discount ?? 0,
-        quantity: 1,
-        image: products[index].Image,
-      ),
-    )
+          Cart(
+            id: index,
+            productId: index.toString(),
+            productName: product.model,
+            initialPrice: product.price,
+            productPrice: (product.discount ?? product.price) as int,
+            quantity: 1,
+            image: "assets//images//login.png",
+          ),
+        )
         .then((value) {
       addCounter();
       log('Product Added to cart');
+      getData();
     }).onError((error, stackTrace) {
       log(error.toString());
     });
+  }
+
+  Future<Uint8List?> _loadImageBytes(String imagePath) async {
+    File imageFile = File(imagePath);
+    if (imageFile.existsSync()) {
+      Uint8List bytes = await imageFile.readAsBytes();
+      return bytes;
+    }
+    return null;
   }
 
   void getData() async {
@@ -40,9 +55,9 @@ class CartCubit extends Cubit<CartState> {
 
   void _setPrefsItems() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('cart_items', state.counter);
-    prefs.setInt('item_quantity', state.quantity);
-    prefs.setDouble('total_price', state.totalPrice);
+    await prefs.setInt('cart_items', state.counter);
+    await prefs.setInt('item_quantity', state.quantity);
+    await prefs.setDouble('total_price', state.totalPrice);
   }
 
   void _getPrefsItems() async {
@@ -64,29 +79,28 @@ class CartCubit extends Cubit<CartState> {
     _setPrefsItems();
   }
 
-//increment
   void addQuantity(int id) {
     final index = state.cart.indexWhere((element) => element.id == id);
-    final newCart = List.of(state.cart);
-    newCart[index].quantity = (newCart[index].quantity! + 1);
-    emit(state.copyWith(cart: newCart));
-    _setPrefsItems();
+    if (index != -1) {
+      final newCart = List<Cart>.from(state.cart);
+      newCart[index].quantity += 1;
+      emit(state.copyWith(cart: newCart));
+      _setPrefsItems();
+    }
   }
 
-//decrement
   void deleteQuantity(int id) {
     final index = state.cart.indexWhere((element) => element.id == id);
-    final newCart = List.of(state.cart);
-    final currentQuantity = newCart[index].quantity;
-    if (currentQuantity! > 1) {
-      newCart[index].quantity = currentQuantity - 1;
+    if (index != -1 && state.cart[index].quantity > 1) {
+      final newCart = List<Cart>.from(state.cart);
+      newCart[index].quantity -= 1;
       emit(state.copyWith(cart: newCart));
+      _setPrefsItems();
     }
-    _setPrefsItems();
   }
 
   void removeItem(int id) {
-    final newCart = List.of(state.cart);
+    final newCart = List<Cart>.from(state.cart);
     newCart.removeWhere((element) => element.id == id);
     emit(state.copyWith(cart: newCart));
     _setPrefsItems();

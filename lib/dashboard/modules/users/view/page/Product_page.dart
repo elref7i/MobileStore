@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_app/dashboard/modules/users/controller/Mobile_cubit.dart';
+import 'package:mobile_app/dashboard/modules/users/controller/Mobile_state.dart';
 import 'package:mobile_app/dashboard/modules/users/view/components/Product_widget.dart';
-import '../../../products/controller/Product_cubit.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -10,13 +11,13 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: ProductCubit.instance,
+      value: ProductCubit.instance, // استخدام الكلاس الصحيح
       child: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
           final ProductCubit controller = context.read<ProductCubit>();
           return Scaffold(
             body: state is ProductStateLoading
-                ? const CircularProgressIndicator()
+                ? const Center(child: CircularProgressIndicator()) // إضافة Center لتوسيط المؤشر
                 : state is ProductStateEmpty
                     ? const Center(
                         child: Icon(

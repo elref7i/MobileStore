@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_app/core/cubit/parent_cubit.dart';
@@ -86,7 +88,7 @@ class CartScreen extends StatelessWidget {
                   Image(
                     height: 100,
                     width: 70,
-                    image: MemoryImage(cart[index].image!),
+                    image: FileImage(File(cart[index].image ?? '')),
                   ),
                   const SizedBox(width: 8.0),
                   Expanded(
