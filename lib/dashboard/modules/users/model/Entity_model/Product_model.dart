@@ -8,11 +8,12 @@ class ProductModel {
       quantity,
       favorite,
       cart,
-      availabilityState;
+      availabilityState,
+      discount;
   late int price;
 
   String? brand, model, color, processor, cameraResolution, os, image;
-  double? screenSize, discount;
+  double? screenSize;
 
   ProductModel.fromjson(Map<String, dynamic> map) {
     id = map['id'];

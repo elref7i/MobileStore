@@ -40,7 +40,7 @@ class ProductCubit extends Cubit<ProductState> {
       os: 'os',
       image: 'assets/images/AirPods-Pro.png',
       screenSize: 6.0,
-      discount: 0.0,
+      discount: 0,
     );
     products = await dbRepo.fetchProducts();
 

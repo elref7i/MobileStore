@@ -29,7 +29,8 @@ class DatabaseRepo {
               quantity INTEGER, 
               favorite INTEGER, 
               cart INTEGER, 
-              availabilityState INTEGER
+              availabilityState INTEGER,
+              discount INTEGER,
             )'''
           );
         },
@@ -81,7 +82,7 @@ class DatabaseRepo {
     required String os,
     required String image,
     required double screenSize,
-    required double discount,
+    required int discount,
   }) async {
     if (database == null) {
       await initDB();
