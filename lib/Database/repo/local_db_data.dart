@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseRepo {
   Database? database;
-
+  DatabaseRepo? instance;
   Future<Database> initDB() async {
     try {
       String path = (await getDatabasesPath()) + "/products.db";

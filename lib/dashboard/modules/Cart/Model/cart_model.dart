@@ -26,7 +26,9 @@ class Cart {
         initialPrice: json['initialPrice'] as int,
         productPrice: json['productPrice'] as int,
         quantity: json['quantity'] as int,
-        image: json['image'] != null ? json['image'] : Uint8List(10),
+        image: json['image'] != null
+            ? json['image']
+            : "assets/phone-image/samsungZfold.jpg",
       );
 
   Map<String, dynamic> toMap() => {

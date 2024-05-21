@@ -16,7 +16,7 @@ class CartCubit extends Cubit<CartState> {
     dbHelper
         .insert(
       Cart(
-        id: index,
+        // id: index,
         productId: index.toString(),
         productName: products[index].model.toString(),
         initialPrice: products[index].price ?? 10000,
@@ -78,7 +78,7 @@ class CartCubit extends Cubit<CartState> {
     final index = state.cart.indexWhere((element) => element.id == id);
     final newCart = List.of(state.cart);
     final currentQuantity = newCart[index].quantity;
-    if (currentQuantity! > 1) {
+    if (currentQuantity > 1) {
       newCart[index].quantity = currentQuantity - 1;
       emit(state.copyWith(cart: newCart));
     }
