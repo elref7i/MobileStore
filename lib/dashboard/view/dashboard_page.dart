@@ -37,49 +37,57 @@ class DashboardPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.displayLarge,
               ),
               actions: [
-                IconButton(
-                  onPressed: () {
-                    ParentCubit.instance.chageMode();
-                  },
-                  icon: Icon(
-                    themeMode == ThemeMode.dark
-                        ? Icons.wb_sunny
-                        : Icons.nights_stay,
-                    color: themeMode == ThemeMode.dark
-                        ? Colors.amber
-                        : const Color.fromARGB(255, 0, 53, 96),
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    ParentCubit.instance.changeLang();
-                  },
-                  icon: Icon(
-                    Icons
-                        .language_outlined, // يمكنك استخدام أيقونة أخرى إن أردت
-                    color: langg == "ar"
-                        ? Color.fromARGB(255, 2, 105, 89)
-                        : const Color.fromARGB(255, 1, 57, 104),
-                  ),
-                  tooltip: langg == "ar" ? 'ar' : 'en',
-                ),
-                badges.Badge(
-                  badgeContent: Text(
-                    '4',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  position: badges.BadgePosition.topEnd(top: 30, end: 30),
-                  child: IconButton(
-                    onPressed: () {
-                      controller.onChangeTabIndex(2);
-                    },
-                    icon: const Icon(
-                      Icons.shopping_cart,
-                      color: Color.fromARGB(255, 116, 90, 227),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0, top: 10.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          ParentCubit.instance.chageMode();
+                        },
+                        icon: Icon(
+                          themeMode == ThemeMode.dark
+                              ? Icons.wb_sunny
+                              : Icons.nights_stay,
+                          color: themeMode == ThemeMode.dark
+                              ? Colors.amber
+                              : const Color.fromARGB(255, 0, 53, 96),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          ParentCubit.instance.changeLang();
+                        },
+                        icon: Icon(
+                          Icons
+                              .language_outlined, // يمكنك استخدام أيقونة أخرى إن أردت
+                          color: langg == "ar"
+                              ? Color.fromARGB(255, 2, 105, 89)
+                              : const Color.fromARGB(255, 1, 57, 104),
+                        ),
+                        tooltip: langg == "ar" ? 'ar' : 'en',
+                      ),
+                      badges.Badge(
+                        badgeContent: Text(
+                          '4',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        position: badges.BadgePosition.topEnd(
+                            top: -5, end: -5), // Adjusted position
+                        child: IconButton(
+                          onPressed: () {
+                            controller.onChangeTabIndex(2);
+                          },
+                          icon: const Icon(
+                            Icons.shopping_cart,
+                            color: Color.fromARGB(255, 116, 90, 227),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

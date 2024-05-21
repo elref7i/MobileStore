@@ -25,7 +25,7 @@ void main() async {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: MyRoutes.onGenerateRoute,
           onGenerateInitialRoutes: (_) =>
-              onBoarding ? MyRoutes.intitial1 : MyRoutes.intitialRoute,
+              onBoarding ? MyRoutes.intitialRoute : MyRoutes.intitial1,
         );
       },
     ),

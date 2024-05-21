@@ -1,54 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:mobile_app/core/utils/context_extention.dart';
 import 'package:mobile_app/dashboard/modules/Home/view/component/search.dart';
 import 'package:mobile_app/utils/colors/colors_constant.dart';
 import 'package:mobile_app/utils/colors/custom_text.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Search(),
-              SizedBox(
-                height: 30,
-              ),
+              SizedBox(height: 20),
+              buildCarouselSlider(),
+              SizedBox(height: 30),
               CustomText(
                 text: "Categories",
-                color: Colors.black,
                 fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               ListViewCateg(),
-              SizedBox(
-                height: 70,
-              ),
+              SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
                     text: "Best Selling",
-                    color: Colors.black,
                     fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                   CustomText(
                     text: "See All",
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
                   ),
                 ],
               ),
-              SizedBox(
-                height: 30,
-              ),
-              ListViewProduct(),
+              SizedBox(height: 30),
+              ListViewProduct(screenWidth: screenWidth),
             ],
           ),
         ),
@@ -56,11 +56,41 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  Widget buildCarouselSlider() {
+    final List<String> imgList = [
+      'assets/images/OppoReno.jpeg',
+      'assets/images/OppoReno.jpeg',
+      'assets/images/OppoReno.jpeg',
+    ];
+
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 200.0,
+        autoPlay: true,
+        autoPlayInterval: Duration(seconds: 3),
+        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enlargeCenterPage: true,
+        viewportFraction: 1.0,
+      ),
+      items: imgList
+          .map((item) => Container(
+                child: Center(
+                  child: Image.asset(
+                    item,
+                    fit: BoxFit.cover,
+                    width: 1000,
+                  ),
+                ),
+              ))
+          .toList(),
+    );
+  }
+
   Widget ListViewCateg() {
     return Container(
       height: 100,
       child: ListView.separated(
-        //itemCount: names.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Column(
@@ -77,9 +107,7 @@ class HomeScreen extends StatelessWidget {
                   child: Image.asset("assets/images/AirPods-Pro.png"),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               CustomText(
                 text: "AIR",
                 fontSize: 20,
@@ -87,75 +115,81 @@ class HomeScreen extends StatelessWidget {
             ],
           );
         },
-        separatorBuilder: (context, index) => SizedBox(
-          width: 10,
-        ),
+        separatorBuilder: (context, index) => SizedBox(width: 10),
         itemCount: 20,
       ),
     );
   }
 
-  Widget ListViewProduct() {
+  Widget ListViewProduct({required double screenWidth}) {
     return Container(
-      height: 350,
+      height: 250,
       child: ListView.separated(
-        //itemCount: names.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
-            width: context.width * .4,
+            width: screenWidth * .4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              // color: Color.fromARGB(255, 175, 173, 173),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: Colors.white,
                   ),
-                  width: context.width * 4,
-                  child: Container(
-                    height: 180,
-                    child: Image.asset(
-                      "assets/images/AirPods-Pro.png",
-                      fit: BoxFit.fill,
-                    ),
+                  child: Image.asset(
+                    "assets/images/AirPods-Pro.png",
+                    height: 150,
+                    width: double.infinity,
+                    fit: BoxFit.fill,
                   ),
                 ),
-                SizedBox(
-                  height: 15,
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: CustomText(
+                    text: "Soundcore",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
-                CustomText(
-                  text: "Soundcore",
-                  alignment: Alignment.bottomLeft,
-                  fontSize: 20,
+                SizedBox(height: 15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: CustomText(
+                    text: "Life P2i",
+                    fontSize: 15,
+                    color: Colors.grey[700]!,
+                  ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                CustomText(
-                  text: "Life P2i",
-                  alignment: Alignment.bottomLeft,
-                  fontSize: 15,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                CustomText(
-                  text: "\$700",
-                  alignment: Alignment.bottomRight,
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 22, 86, 159),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: CustomText(
+                    text: "\$700",
+                    fontSize: 16,
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
           );
         },
-        separatorBuilder: (context, index) => SizedBox(
-          width: 20,
-        ),
+        separatorBuilder: (context, index) => SizedBox(width: 20),
         itemCount: 3,
       ),
     );
