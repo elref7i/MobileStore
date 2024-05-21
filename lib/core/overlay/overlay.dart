@@ -27,20 +27,22 @@ class SocialLoginOverlay extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color.fromARGB(255, 255, 255, 255),
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(height: 20),
           Text(
             'Social Media Login',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 70),
           TextField(
             decoration: InputDecoration(
               labelText: 'Email',
@@ -48,7 +50,7 @@ class SocialLoginOverlay extends StatelessWidget {
               border: OutlineInputBorder(),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
           TextField(
             decoration: InputDecoration(
               labelText: 'Password',
@@ -57,7 +59,7 @@ class SocialLoginOverlay extends StatelessWidget {
             ),
             obscureText: true,
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 30),
           ElevatedButton(
             onPressed: () {
               // Handle login
