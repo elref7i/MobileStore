@@ -1,11 +1,7 @@
-import 'dart:developer';
-import 'dart:ui';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/foundation.dart';
 import 'package:mobile_app/dashboard/modules/users/controller/Mobile_state.dart';
 import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';
 import 'package:mobile_app/Database/repo/local_db_data.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   static final ProductCubit instance = ProductCubit._internal();
@@ -62,9 +58,9 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductStateLoaded());
   }
 
-  Future<void> addItemToFavorite(int value, int id) async {
-    await dbRepo.updateFavorite(id, value);
-    products = await dbRepo.fetchProducts();
-    emit(ProductStateLoaded());
-  }
+  // Future<void> addItemToFavorite(int value, int id) async {
+  //   await dbRepo.updateFavorite(id, value);
+  //   products = await dbRepo.fetchProducts();
+  //   emit(ProductStateLoaded());
+  // }
 }

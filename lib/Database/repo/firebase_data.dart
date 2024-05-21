@@ -103,7 +103,7 @@
 //     int cart = 0,
 //     String description = '''Here you can find all the information you need ''',
 //     required String image,
-//     // Uint8List? video,
+//     String? video,
 //     required int quantity,
 //     int? discount,
 //   }) async {

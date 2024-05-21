@@ -16,7 +16,7 @@ class DBHelper {
   Future<Database> initDatabase() async {
     String directory = await getDatabasesPath();
     String path = directory + '/cart.db';
-    var db = await openDatabase(path, version: 5, onCreate: _onCreate);
+    var db = await openDatabase(path, version: 7, onCreate: _onCreate);
     return db;
   }
 

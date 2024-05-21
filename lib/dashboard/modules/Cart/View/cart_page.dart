@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_app/core/cubit/parent_cubit.dart';
@@ -6,6 +5,7 @@ import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_cubit.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_state.dart';
 import 'package:mobile_app/dashboard/modules/Cart/Model/cart_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_app/dashboard/modules/Cart/View/constantCart.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -71,106 +71,111 @@ class CartScreen extends StatelessWidget {
         ),
       );
     } else {
-      return ListView.builder(
-        shrinkWrap: true,
-        itemCount: cart.length,
-        itemBuilder: (context, index) {
-          return Card(
-            color: Colors.blueGrey.shade200,
-            elevation: 5.0,
-            child: Padding(
-              padding: const EdgeInsets.all(0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                    height: 300,
-                    width: 70,
-                    image: FileImage(File(cart[index].image ?? '')),
-                  ),
-                  const SizedBox(width: 8.0),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      return my_cart.isEmpty
+          ? Center(
+              child: Text("NO items Found"),
+            )
+          : ListView.builder(
+              shrinkWrap: true,
+              itemCount: my_cart.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  color: Colors.blueGrey.shade200,
+                  elevation: 5.0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        RichText(
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          text: TextSpan(
-                            text: 'Name: ',
-                            style: Theme.of(context).textTheme.bodyLarge ??
-                                TextStyle(
-                                  color: Colors.blueGrey.shade800,
-                                  fontSize: 16.0,
-                                ),
+                        Image.asset(
+                          my_cart[index].image.toString(),
+                          height: 150,
+                          width: 70,
+                        ),
+                        const SizedBox(width: 8.0),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextSpan(
-                                text: '${cart[index].productName}\n',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                              RichText(
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                text: TextSpan(
+                                  style:
+                                      Theme.of(context).textTheme.bodyLarge ??
+                                          TextStyle(
+                                            color: Colors.blueGrey.shade800,
+                                            fontSize: 16.0,
+                                          ),
+                                  children: [
+                                    TextSpan(
+                                      text: '${my_cart[index].brand}\n',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              RichText(
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                text: TextSpan(
+                                  text: 'Price: ' r"$",
+                                  style: TextStyle(
+                                    color: Colors.blueGrey.shade800,
+                                    fontSize: 16.0,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: '${my_cart[index].price}\n',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        RichText(
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          text: TextSpan(
-                            text: 'Price: ' r"$",
-                            style: TextStyle(
-                              color: Colors.blueGrey.shade800,
-                              fontSize: 16.0,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '${cart[index].productPrice}\n',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                        BlocListener<CartCubit, CartState>(
+                          listener: (context, state) {},
+                          child: Builder(
+                            builder: (context) {
+                              return PlusMinusButtons(
+                                addQuantity: () {
+                                  context
+                                      .read<CartCubit>()
+                                      .addQuantity(cart[index].id!);
+                                },
+                                deleteQuantity: () {
+                                  context
+                                      .read<CartCubit>()
+                                      .deleteQuantity(cart[index].id!);
+                                },
+                                text: cart[index].quantity.toString(),
+                              );
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            my_cart.remove(my_cart[index]);
+                            // context.read<CartCubit>().removeItem(my_cart[index].id!);
+                          },
+                          icon: Icon(
+                            Icons.delete,
+                            color: Color.fromARGB(255, 32, 77, 155),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  BlocListener<CartCubit, CartState>(
-                    listener: (context, state) {},
-                    child: Builder(
-                      builder: (context) {
-                        return PlusMinusButtons(
-                          addQuantity: () {
-                            context
-                                .read<CartCubit>()
-                                .addQuantity(cart[index].id!);
-                          },
-                          deleteQuantity: () {
-                            context
-                                .read<CartCubit>()
-                                .deleteQuantity(cart[index].id!);
-                          },
-                          text: cart[index].quantity.toString(),
-                        );
-                      },
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      context.read<CartCubit>().removeItem(cart[index].id!);
-                    },
-                    icon: Icon(
-                      Icons.delete,
-                      color: Color.fromARGB(255, 32, 77, 155),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      );
+                );
+              },
+            );
     }
   }
 }

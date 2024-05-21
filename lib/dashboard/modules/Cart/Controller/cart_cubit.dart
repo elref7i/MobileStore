@@ -10,7 +10,7 @@ class CartCubit extends Cubit<CartState> {
   DBHelper dbHelper = DBHelper();
 
   CartCubit()
-      : super(CartState(cart: [], quantity: 1, counter: 0, totalPrice: 0));
+      : super(CartState(cart: [], quantity: 1, counter: 0, totalPrice: 200000));
 
   void saveData(List<ProductModel> products, int index) {
     dbHelper
@@ -90,7 +90,7 @@ class CartCubit extends Cubit<CartState> {
     newCart.removeWhere((element) => element.id == id);
     emit(state.copyWith(cart: newCart));
     _setPrefsItems();
-    log("element Deleted from cart");
+    log("element Deleted from cart with id ${id.toString()}");
   }
 
   void addTotalPrice(double productPrice) {
