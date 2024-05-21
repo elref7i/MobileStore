@@ -18,10 +18,10 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: Text(
             namebutton,
-            style: Theme.of(context).textTheme.displayLarge,
-            ),
+            style: TextStyle(backgroundColor: Color.fromARGB(66, 68, 67, 67)),
           ),
         ),
+      ),
     );
   }
 }
