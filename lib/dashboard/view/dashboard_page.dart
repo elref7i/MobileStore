@@ -59,13 +59,12 @@ class DashboardPage extends StatelessWidget {
                           ParentCubit.instance.changeLang();
                         },
                         icon: Icon(
-                          Icons
-                              .language_outlined, // يمكنك استخدام أيقونة أخرى إن أردت
+                          Icons.language_outlined,
                           color: langg == "ar"
                               ? Color.fromARGB(255, 2, 105, 89)
                               : const Color.fromARGB(255, 1, 57, 104),
                         ),
-                        tooltip: langg == "ar" ? 'ar' : 'en',
+                        tooltip: langg == "ar" ? 'en' : 'ar',
                       ),
                       badges.Badge(
                         badgeContent: Text(
@@ -111,13 +110,16 @@ class DashboardPage extends StatelessWidget {
               showSelectedLabels: true,
               unselectedLabelStyle: const TextStyle(
                   fontSize: 15, color: Color.fromARGB(255, 211, 18, 18)),
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.home), label: "Home"),
+                    icon: Icon(CupertinoIcons.home),
+                    label: "home_page_tittle".tr),
                 BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.heart), label: "Favorite"),
+                    icon: Icon(CupertinoIcons.heart),
+                    label: "item_page_title".tr),
                 BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.cart), label: "Cart"),
+                    icon: Icon(CupertinoIcons.cart),
+                    label: "cart_page_title".tr),
                 BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.person), label: "User"),
               ],

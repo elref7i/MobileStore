@@ -25,14 +25,14 @@ void main() async {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: MyRoutes.onGenerateRoute,
           onGenerateInitialRoutes: (_) =>
-              onBoarding ? MyRoutes.intitialRoute : MyRoutes.intitial1,
+              onBoarding ? MyRoutes.intitial1 : MyRoutes.intitialRoute,
         );
       },
     ),
   );
   runApp(
     DevicePreview(
-      enabled: false,
+      enabled: true,
       builder: (context) => materialApp, // Wrap your app
     ),
   );
