@@ -58,9 +58,17 @@ class HomeScreen extends StatelessWidget {
 
   Widget buildCarouselSlider() {
     final List<String> imgList = [
-      'assets/images/OppoReno.jpeg',
-      'assets/images/OppoReno.jpeg',
-      'assets/images/OppoReno.jpeg',
+      'assets/images/mobile3.png',
+      'assets/images/mobile1.png',
+      'assets/images/OppoReno.png',
+      'assets/images/mobile2.png',
+      'assets/images/Beats.png',
+      'assets/images/mobile4.png',
+      'assets/images/mobile5.png',
+      'assets/images/mobile6.png',
+      'assets/images/mobile7.png',
+      'assets/images/mobile8.png',
+      'assets/images/mobile9.png',
     ];
 
     return CarouselSlider(
@@ -78,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                 child: Center(
                   child: Image.asset(
                     item,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                     width: 1000,
                   ),
                 ),
