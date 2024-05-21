@@ -105,6 +105,8 @@ flutter:
     - assets/images/
     - assets/phone-image/
     - assets/icons/
+    - assets/phone-image/
+    - assets/phone-image/iphone14.jpg
     - assets/icons/Camera_Icon.svg
     - assets/icons/User_Icon.svg
     - assets/icons/Settings.svg

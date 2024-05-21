@@ -1,8 +1,9 @@
 // import 'dart:developer';
-// import 'dart:typed_data';
 // import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:mobile_app/dashboard/modules/users/model/repo/local_db_data.dart';
-// import 'package:mobile_app/dashboard/modules/users/model/repo/parent.dart';
+// import 'package:flutter/widgets.dart';
+// import 'package:mobile_app/Database/repo/local_db_data.dart';
+// import 'package:mobile_app/Database/repo/parent.dart';
+
 // import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';
 // import 'package:sqflite/sqlite_api.dart';
 
@@ -35,34 +36,34 @@
 //   }
 
 //   /////////////////++++++++++++++++++++++++++++++++
-//   // static Future addProductToCart({
-//   //   required BuildContext context,
-//   //   required UserProductModel productModel,
-//   // }) async {
-//   //   try {
-//   //     await FirebaseFirestore.instance
-//   //         .collection('Cart')
-//   //         .doc(auth.currentUser!.phoneNumber)
-//   //         .collection('myCart')
-//   //         .where('productID', isEqualTo: productModel.productID)
-//   //         .get()
-//   //         .then((value) async {
-//   //       if (value.size < 1) {
-//   //         await FirebaseFirestore.instance
-//   //             .collection('Cart')
-//   //             .doc(auth.currentUser!.phoneNumber)
-//   //             .collection('myCart')
-//   //             .doc(productModel.productID)
-//   //             .set(productModel.toMap())
-//   //             .whenComplete(() {
-//   //           log('Data Added');
-//   //         });
-//   //       }
-//   //     });
-//   //   } catch (e) {
-//   //     log(e.toString());
-//   //   }
-//   // }
+//   static Future addProductToCart({
+//     required BuildContext context,
+//     required ProductModel productModel,
+//   }) async {
+//     try {
+//       await FirebaseFirestore.instance
+//           .collection('Cart')
+//           .doc(auth.currentUser!.phoneNumber)
+//           .collection('myCart')
+//           .where('productID', isEqualTo: productModel.id)
+//           .get()
+//           .then((value) async {
+//         if (value.size < 1) {
+//           await FirebaseFirestore.instance
+//               .collection('Cart')
+//               .doc(auth.currentUser!.phoneNumber)
+//               .collection('myCart')
+//               .doc(productModel.id)
+//               .set(productModel.toMap())
+//               .whenComplete(() {
+//             log('Data Added');
+//           });
+//         }
+//       });
+//     } catch (e) {
+//       log(e.toString());
+//     }
+//   }
 // ////////////////////////////////////////////////////////////////
 
 //   @override
@@ -74,15 +75,15 @@
 
 //   ///NEED to delete OR Explain OR take a Look Ya HANEEN 🤔😏
 //   @override
-//   // Future<void> update({required int ID}) async {
-//   //   CollectionReference products =
-//   //       FirebaseFirestore.instance.collection("products");
-//   //   await products
-//   //       .doc(ID.toString())
-//   //       .update({"price": " "})
-//   //       .then((value) => print("Price Updated"))
-//   //       .catchError((error) => print("Faild"));
-//   // }
+//   Future<void> update({required int ID}) async {
+//     CollectionReference products =
+//         FirebaseFirestore.instance.collection("products");
+//     await products
+//         .doc(ID.toString())
+//         .update({"price": " "})
+//         .then((value) => print("Price Updated"))
+//         .catchError((error) => print("Faild"));
+//   }
 
 //   @override
 //   Future<void> insert({
@@ -101,8 +102,8 @@
 //     int favorite = 0,
 //     int cart = 0,
 //     String description = '''Here you can find all the information you need ''',
-//     required Uint8List image,
-//     Uint8List? video,
+//     required String image,
+//     // Uint8List? video,
 //     required int quantity,
 //     int? discount,
 //   }) async {

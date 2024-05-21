@@ -15,7 +15,7 @@ class ProductModel {
   double? screenSize;
 
   ProductModel.fromjson(Map<String, dynamic> map) {
-    id = map['id'] ?? 1;
+    id = map['id'];
     brand = map['brand'];
     model = map['model'];
     storageCapacity = map['storageCapacity'];
