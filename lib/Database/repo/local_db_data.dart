@@ -11,8 +11,7 @@ class DatabaseRepo {
         path,
         version: 1,
         onCreate: (db, version) {
-          return db.execute(
-            '''CREATE TABLE products(
+          return db.execute('''CREATE TABLE products(
               id INTEGER PRIMARY KEY AUTOINCREMENT, 
               brand TEXT,
               model TEXT, 
@@ -30,9 +29,8 @@ class DatabaseRepo {
               favorite INTEGER, 
               cart INTEGER, 
               availabilityState INTEGER,
-              discount INTEGER,
-            )'''
-          );
+              discount INTEGER
+            )''');
         },
       );
       return database!;
@@ -54,7 +52,8 @@ class DatabaseRepo {
     if (database == null) {
       await initDB();
     }
-    List<Map<String, dynamic>> maps = await database!.query('products', where: 'favorite = ?', whereArgs: [1]);
+    List<Map<String, dynamic>> maps = await database!
+        .query('products', where: 'favorite = ?', whereArgs: [1]);
     return maps.map((e) => ProductModel.fromjson(e)).toList();
   }
 
@@ -62,12 +61,12 @@ class DatabaseRepo {
     if (database == null) {
       await initDB();
     }
-    List<Map<String, dynamic>> maps = await database!.query('products', where: 'cart = ?', whereArgs: [1]);
+    List<Map<String, dynamic>> maps =
+        await database!.query('products', where: 'cart = ?', whereArgs: [1]);
     return maps.map((e) => ProductModel.fromjson(e)).toList();
   }
 
   Future<void> insertProduct({
-    required int id,
     required int storageCapacity,
     required int price,
     required int ramCapacity,
@@ -88,7 +87,6 @@ class DatabaseRepo {
       await initDB();
     }
     await database!.insert('products', {
-      "id": id,
       "storageCapacity": storageCapacity,
       "price": price,
       "ramCapacity": ramCapacity,
@@ -113,13 +111,15 @@ class DatabaseRepo {
     if (database == null) {
       await initDB();
     }
-    await database!.update('products', {'cart': value}, where: 'id = ?', whereArgs: [id]);
+    await database!
+        .update('products', {'cart': value}, where: 'id = ?', whereArgs: [id]);
   }
 
   Future<void> updateFavorite(int id, int value) async {
     if (database == null) {
       await initDB();
     }
-    await database!.update('products', {'favorite': value}, where: 'id = ?', whereArgs: [id]);
+    await database!.update('products', {'favorite': value},
+        where: 'id = ?', whereArgs: [id]);
   }
 }

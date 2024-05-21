@@ -7,8 +7,8 @@ import 'package:mobile_app/dashboard/controller/cubit/dashboard_cubit.dart';
 import 'package:mobile_app/dashboard/modules/Cart/View/cart_page.dart';
 import 'package:mobile_app/dashboard/modules/Home/view/home_page.dart';
 import 'package:mobile_app/dashboard/modules/users/profile/profile_screen.dart';
+import 'package:mobile_app/dashboard/modules/users/view/page/Product_page.dart';
 import 'package:mobile_app/utils/colors/colors_constant.dart';
-import '../../modules/users/view/page/Product_page.dart';
 import 'package:badges/badges.dart' as badges;
 
 class DashboardPage extends StatelessWidget {
@@ -31,7 +31,7 @@ class DashboardPage extends StatelessWidget {
           final langg = ParentCubit.instance.lang;
           return Scaffold(
             appBar: AppBar(
-             // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+              // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
               title: Text(
                 titles[controller.selectedTapIndex],
                 style: Theme.of(context).textTheme.displayLarge,

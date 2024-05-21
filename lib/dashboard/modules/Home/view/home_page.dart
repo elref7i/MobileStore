@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/core/utils/context_extention.dart';
 import 'package:mobile_app/dashboard/modules/Home/view/component/search.dart';
 import 'package:mobile_app/utils/colors/colors_constant.dart';
-import 'package:mobile_app/widgets/custom_text.dart';
+import 'package:mobile_app/utils/colors/custom_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key});
@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
             width: context.width * .4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-             // color: Color.fromARGB(255, 175, 173, 173),
+              // color: Color.fromARGB(255, 175, 173, 173),
             ),
             child: Column(
               children: [

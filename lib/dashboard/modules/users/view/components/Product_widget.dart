@@ -1,8 +1,9 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/dashboard/modules/Cart/Controller/cart_cubit.dart';
 import 'package:mobile_app/dashboard/modules/users/controller/Mobile_cubit.dart';
 import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';
+
 class ProductItemWidget extends StatelessWidget {
   ProductItemWidget({
     Key? key,
@@ -14,8 +15,7 @@ class ProductItemWidget extends StatelessWidget {
   final ProductModel productModel;
   final ProductCubit controller;
   final List<ProductModel> products;
-  //final CartCubit controllerCart = CartCubit();
-
+  final CartCubit controllerCart = CartCubit();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,14 +33,14 @@ class ProductItemWidget extends StatelessWidget {
               // Product information
               Row(
                 children: [
-                  if (productModel.image != null && productModel.image!.isNotEmpty)
+                  if (productModel.image.isNotEmpty)
                     ClipRRect(
                       borderRadius: BorderRadius.circular(25),
-                      child: Image.file(
-                        File(productModel.image!),
+                      child: Image.asset(
+                        productModel.image,
                         height: 150,
-                        width: 150,
-                        fit: BoxFit.fill,
+                        width: 100,
+                        fit: BoxFit.fitWidth,
                       ),
                     )
                   else
@@ -109,13 +109,13 @@ class ProductItemWidget extends StatelessWidget {
                             color: Colors.red,
                             size: 35,
                           ),
-                    // onTap: () {
-                    //   if (productModel.favorite == 1) {
-                    //     controller.addToFavourite(productModel.id!, 0);
-                    //   } else {
-                    //     controller.addToFavourite(productModel.id!, 1);
-                    //   }
-                    //},
+                    onTap: () {
+                      if (productModel.favorite == 1) {
+                        controller.addToFavourite(productModel.id, 0);
+                      } else {
+                        controller.addToFavourite(productModel.id, 1);
+                      }
+                    },
                   ),
                   // Separator
                   Container(
@@ -135,16 +135,19 @@ class ProductItemWidget extends StatelessWidget {
                             CupertinoIcons.cart,
                             color: Colors.blue,
                             size: 35,
+
+                            /// remove from cart ya omar😒
+                            //  controllerCart.removeItem(cart[index].id!);
                           ),
-                    // onTap: () {
-                    //   if (productModel.cart == 1) {
-                    //     controller.addToCart(productModel.id!, 0);
-                    //     controllerCart.saveData(products, productModel.id! - 1);
-                    //   } else {
-                    //     controller.addToCart(productModel.id!, 1);
-                    //     controllerCart.saveData(products, productModel.id! - 1);
-                    //   }
-                    // },
+                    onTap: () {
+                      if (productModel.cart == 1) {
+                        controller.addToCart(productModel.id, 0);
+                        controllerCart.saveData(products, productModel.id - 1);
+                      } else {
+                        controller.addToCart(productModel.id, 1);
+                        controllerCart.saveData(products, productModel.id - 1);
+                      }
+                    },
                   ),
                 ],
               )

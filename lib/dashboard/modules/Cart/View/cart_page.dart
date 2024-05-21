@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_app/core/cubit/parent_cubit.dart';
@@ -80,13 +79,13 @@ class CartScreen extends StatelessWidget {
             color: Colors.blueGrey.shade200,
             elevation: 5.0,
             child: Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.all(0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image(
-                    height: 100,
+                    height: 300,
                     width: 70,
                     image: FileImage(File(cart[index].image ?? '')),
                   ),
@@ -107,7 +106,7 @@ class CartScreen extends StatelessWidget {
                                 ),
                             children: [
                               TextSpan(
-                                text: '${cart[index].productName!}\n',
+                                text: '${cart[index].productName}\n',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -213,11 +212,11 @@ class ReusableWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           Text(
             value.toString(),
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),

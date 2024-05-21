@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app/core/utils/Validation.dart';
 import 'package:mobile_app/auth/regestration/controller/cubit/regester_cubit.dart';
 import 'package:mobile_app/screens/Login_Page.dart';
-import 'package:mobile_app/widgets/custom_button.dart';
-import 'package:mobile_app/widgets/custome_text_field.dart';
-import 'package:mobile_app/widgets/my_text_field.dart';
+import 'package:mobile_app/utils/colors/custom_button.dart';
+import 'package:mobile_app/utils/colors/custome_text_field.dart';
+import 'package:mobile_app/utils/colors/my_text_field.dart';
 
 class SignUpBody extends StatelessWidget {
   const SignUpBody({super.key});

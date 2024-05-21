@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app/core/utils/context_extention.dart';
 import 'package:mobile_app/auth/forget/controller/cubit/forget_cubit.dart';
-import 'package:mobile_app/widgets/custom_button.dart';
+import 'package:mobile_app/utils/colors/custom_button.dart';
 import 'package:mobile_app/auth/forget/controller/cubit/OTP_Controler.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -45,7 +45,7 @@ class OPTScreen extends StatelessWidget {
                         "Enter the Verification code sent at Email",
                         textAlign: TextAlign.center,
                       ),
-                     // Text(MediaQuery.of(context).size.width.toString()),
+                      // Text(MediaQuery.of(context).size.width.toString()),
                       const SizedBox(
                         height: 40,
                       ),
@@ -77,13 +77,14 @@ class OPTScreen extends StatelessWidget {
                         pinTheme: PinTheme(
                           shape: PinCodeFieldShape.box,
                           borderRadius: BorderRadius.circular(5),
-                          fieldHeight: context.width/8,
-                          fieldWidth:context.width/8,
+                          fieldHeight: context.width / 8,
+                          fieldWidth: context.width / 8,
                           activeFillColor: Colors.white,
                           inactiveFillColor: Color.fromARGB(255, 141, 145, 148),
                           inactiveColor: Color.fromARGB(255, 1, 33, 79),
-                          fieldOuterPadding: EdgeInsets.only(right: context.width/48),
-                        ),  
+                          fieldOuterPadding:
+                              EdgeInsets.only(right: context.width / 48),
+                        ),
                         cursorColor: Colors.black,
                         animationDuration: const Duration(milliseconds: 300),
                         enableActiveFill: true,

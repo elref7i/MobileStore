@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/auth/forget/controller/cubit/OTP.dart';
-import 'package:mobile_app/dashboard/view/page/dashboard_page.dart';
+import 'package:mobile_app/dashboard/view/dashboard_page.dart';
 import 'package:mobile_app/screens/Login_Page.dart';
 import 'package:mobile_app/screens/Sign_up.dart';
 import 'package:mobile_app/screens/confirm.dart';
@@ -14,7 +14,8 @@ class MyRoutes {
         builder: (BuildContext context) => onBoardingPage()),
   ];
   static List<Route> intitial1 = [
-    MaterialPageRoute<dynamic>(builder: (BuildContext context) => DashboardPage()),
+    MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) => DashboardPage()),
   ];
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
@@ -36,7 +37,7 @@ class MyRoutes {
       case 'otp':
         return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => OPTScreen());
-            case 'dashboard':
+      case 'dashboard':
         return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => DashboardPage());
       default:

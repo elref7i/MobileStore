@@ -1,11 +1,11 @@
 import 'dart:developer';
+import 'dart:ui';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobile_app/dashboard/modules/users/controller/Mobile_state.dart';
 import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';
-import 'package:mobile_app/dashboard/modules/users/model/repo/local_db_data.dart';
+import 'package:mobile_app/Database/repo/local_db_data.dart';
 import 'package:sqflite/sqlite_api.dart';
-
 
 class ProductCubit extends Cubit<ProductState> {
   static final ProductCubit instance = ProductCubit._internal();
@@ -20,12 +20,11 @@ class ProductCubit extends Cubit<ProductState> {
   final DatabaseRepo dbRepo = DatabaseRepo();
 
   List<ProductModel> products = [];
-
+  String imagePath = 'assets/phone-image/iphone14.jpg';
   Future<void> init() async {
     emit(ProductStateLoading());
     await dbRepo.initDB();
     await dbRepo.insertProduct(
-      id: 1,
       storageCapacity: 64,
       price: 22000,
       ramCapacity: 6,
@@ -38,7 +37,7 @@ class ProductCubit extends Cubit<ProductState> {
       processor: 'processor',
       cameraResolution: 'cameraResolution',
       os: 'os',
-      image: 'assets/images/AirPods-Pro.png',
+      image: imagePath,
       screenSize: 6.0,
       discount: 0,
     );

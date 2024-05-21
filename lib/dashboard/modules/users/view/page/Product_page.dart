@@ -11,13 +11,13 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: ProductCubit.instance, // استخدام الكلاس الصحيح
+      value: ProductCubit.instance,
       child: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
           final ProductCubit controller = context.read<ProductCubit>();
           return Scaffold(
             body: state is ProductStateLoading
-                ? const Center(child: CircularProgressIndicator()) // إضافة Center لتوسيط المؤشر
+                ? const Center(child: CircularProgressIndicator())
                 : state is ProductStateEmpty
                     ? const Center(
                         child: Icon(

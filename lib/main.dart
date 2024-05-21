@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app/core/cubit/parent_cubit.dart';
 import 'package:mobile_app/core/firebase/my_firebase.dart';
 import 'package:mobile_app/core/utils/Routing.dart';
+import 'package:mobile_app/core/utils/my_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mobile_app/core/my_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,22 +1,21 @@
-import 'package:mobile_app/dashboard/modules/users/model/repo/local_db_data.dart';
-
 class ProductModel {
-  int? id,
-      storageCapacity,
+  late int id;
+  int? storageCapacity,
       ramCapacity,
       year,
       quantity,
       favorite,
       cart,
-      availabilityState,
-      discount;
+      discount,
+      availabilityState;
   late int price;
 
-  String? brand, model, color, processor, cameraResolution, os, image;
+  String? brand, model, color, processor, cameraResolution, os;
+  late String image;
   double? screenSize;
 
   ProductModel.fromjson(Map<String, dynamic> map) {
-    id = map['id'];
+    id = map['id'] ?? 1;
     brand = map['brand'];
     model = map['model'];
     storageCapacity = map['storageCapacity'];
@@ -28,7 +27,7 @@ class ProductModel {
     cameraResolution = map['cameraResolution'];
     os = map['os'];
     year = map['year'];
-    image = map['image'];
+    image = map['image'] ?? "assets/phone-image/samsungZfold.jpg";
     quantity = map['quantity'];
     discount = map['discount'];
     favorite = map['favorite'];
