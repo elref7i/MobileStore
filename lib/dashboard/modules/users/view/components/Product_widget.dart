@@ -159,6 +159,7 @@ class ProductItemWidget extends StatelessWidget {
                                 // controller.addToCart(productModel.id, 0);
                                 deleteCartItem(productModel.id);
                                 log("deleted with id ${productModel.id.toString()}");
+                                // emit(state.copyWith(cart: List.empty()));
                               }
                             } else {
                               controller.addToCart(productModel.id, 1);
