@@ -20,9 +20,11 @@ class OnBoardingBody extends StatelessWidget {
                     children: List.generate(controller.Data.length, (index) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset(controller.Data[index].image),
                           Text(
+                            textAlign: TextAlign.center,
                             controller.Data[index].title,
                             style: TextStyle(
                               color: controller.Data[index].color,
@@ -31,6 +33,7 @@ class OnBoardingBody extends StatelessWidget {
                             ),
                           ),
                           Text(
+                            textAlign: TextAlign.center,
                             controller.Data[index].subtitle,
                             style: const TextStyle(
                               color: Colors.grey,

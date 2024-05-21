@@ -26,12 +26,12 @@ class OnboardingCubit extends Cubit<OnboardingState> {
             builder: (BuildContext context) => const Login()));
   }
 
-  List Data = [
+  List<OnboardingModel> Data = [
     OnboardingModel(
         image: "assets/images/mobilegif.gif",
         title: "Choose Your Product",
         subtitle:
-            "Welcorne to a World ot Urnitiess Choices - \nPerfect Product Awaits'",
+            "Welcome to a World of Unlimited Choices - \nPerfect Product Awaits",
         color: Color.fromARGB(255, 34, 65, 90)),
     OnboardingModel(
       image: "assets/images/animation_shop.jpeg",
@@ -40,22 +40,10 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       color: Color.fromARGB(255, 89, 22, 1),
     ),
     OnboardingModel(
-      image: "assets/images/OppoReno.png",
-      title: "OppoReno",
-      subtitle: "",
-      color: Color.fromARGB(255, 48, 20, 119),
-    ),
-    OnboardingModel(
-      image: "assets/images/AirPods-Pro.png",
-      title: "Powerbank",
-      subtitle: "",
-      color: Color.fromARGB(255, 48, 20, 119),
-    ),
-    OnboardingModel(
-      image: "assets/images/Beats.png",
-      title: "Beats",
-      subtitle: "",
-      color: Color.fromARGB(255, 48, 20, 119),
+      image: "assets/images/paymenton.png",
+      title: "Product receipt",
+      subtitle: "For Seamless Transactions",
+      color: Color.fromARGB(255, 89, 22, 1),
     ),
   ];
 }
