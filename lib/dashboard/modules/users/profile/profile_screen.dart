@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/dashboard/modules/users/profile/Setting.dart';
+import 'package:mobile_app/dashboard/modules/users/profile/my_account.dart';
+import 'package:mobile_app/dashboard/modules/users/profile/help.dart';
 import 'components/profile_menu.dart';
 import 'components/profile_pic.dart';
 
@@ -9,9 +12,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Hello Hanona .."),
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
@@ -21,27 +21,45 @@ class ProfileScreen extends StatelessWidget {
             ProfileMenu(
               text: "My Account",
               icon: "assets/icons/User_Icon.svg",
-              press: () => {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyAccountScreen()),
+                );
+              },
             ),
             ProfileMenu(
               text: "Notifications",
               icon: "assets/icons/Bell.svg",
-              press: () {},
+              press: () => {},
             ),
             ProfileMenu(
               text: "Settings",
               icon: "assets/icons/Settings.svg",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingsScreen()),
+                );
+              },
             ),
             ProfileMenu(
               text: "Help Center",
               icon: "assets/icons/Question_mark.svg",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HelpCenterScreen()),
+                );
+              },
             ),
             ProfileMenu(
               text: "Log Out",
               icon: "assets/icons/Log_out.svg",
-              press: () {},
+              press: () => {},
             ),
           ],
         ),
