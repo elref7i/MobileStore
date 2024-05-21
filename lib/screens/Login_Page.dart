@@ -12,7 +12,7 @@ class _LoginScreenState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      //backgroundColor: Colors.grey[300],
       body: LoginBody(),
     );
   }

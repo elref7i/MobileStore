@@ -11,21 +11,17 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: Color.fromARGB(255, 61, 53, 53),
+            color: Color.fromARGB(255, 5, 66, 106),
             borderRadius: BorderRadius.circular(7)),
         width: double.infinity,
         height: 60,
         child: Center(
           child: Text(
             namebutton,
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
+            style: Theme.of(context).textTheme.displayLarge,
             ),
           ),
         ),
-      ),
     );
   }
 }
