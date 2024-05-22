@@ -91,7 +91,7 @@ class CartScreen extends StatelessWidget {
                         Image.asset(
                           my_cart[index].image.toString(),
                           height: 150,
-                          width: 70,
+                          width: 80,
                         ),
                         const SizedBox(width: 8.0),
                         Expanded(

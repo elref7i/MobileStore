@@ -120,7 +120,7 @@ class LoginBody extends StatelessWidget {
                       showConfirmation: false,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 16,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -141,7 +141,7 @@ class LoginBody extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 17,
                     ),
                     CustomButton(
                       namebutton: 'Login',
@@ -158,7 +158,7 @@ class LoginBody extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

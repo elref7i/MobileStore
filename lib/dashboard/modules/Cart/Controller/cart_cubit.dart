@@ -19,7 +19,7 @@ class CartCubit extends Cubit<CartState> {
         // id: index,
         productId: index.toString(),
         productName: products[index].model.toString(),
-        initialPrice: products[index].price ?? 10000,
+        initialPrice: products[index].price,
         productPrice: products[index].discount ?? 0,
         quantity: 1,
         image: products[index].image,

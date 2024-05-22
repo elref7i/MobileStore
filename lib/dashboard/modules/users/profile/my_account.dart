@@ -73,7 +73,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     radius: 50,
                     backgroundImage: _profileImage != null
                         ? FileImage(_profileImage!)
-                        : AssetImage("assets/images/profile.jpg")
+                        : AssetImage("assets/images/download.jpg")
                             as ImageProvider,
                   ),
                   Positioned(

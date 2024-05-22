@@ -115,7 +115,7 @@ class DashboardPage extends StatelessWidget {
                     icon: Icon(CupertinoIcons.home),
                     label: "home_page_tittle".tr),
                 BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.heart),
+                    icon: Icon(CupertinoIcons.collections),
                     label: "item_page_title".tr),
                 BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.cart),

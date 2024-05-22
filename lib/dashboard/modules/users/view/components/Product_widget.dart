@@ -160,18 +160,3 @@ class ProductItemWidget extends StatelessWidget {
     );
   }
 }
-
-Future<int> deleteCartItem(int id) async {
-  try {
-    var dbClient = await DBHelper().instance;
-    if (dbClient != null) {
-      return await dbClient.delete('cart', where: 'id = ?', whereArgs: [id]);
-    } else {
-      log('Database client is null, delete operation failed.');
-      return 0;
-    }
-  } catch (e) {
-    log('Error deleting cart item: $e');
-    return 0;
-  }
-}
