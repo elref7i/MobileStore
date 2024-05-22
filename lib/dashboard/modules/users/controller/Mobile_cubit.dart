@@ -5,6 +5,10 @@ import 'package:mobile_app/Database/repo/local_db_data.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   static final ProductCubit instance = ProductCubit._internal();
+  final DatabaseRepo dbRepo = DatabaseRepo();
+  List<ProductModel> products = [];
+  final String imagePath = 'assets/phone-image/iphone14.jpg';
+
   ProductCubit._internal() : super(ProductStateLoading()) {
     init();
   }
@@ -13,10 +17,6 @@ class ProductCubit extends Cubit<ProductState> {
     return instance;
   }
 
-  final DatabaseRepo dbRepo = DatabaseRepo();
-
-  List<ProductModel> products = [];
-  String imagePath = 'assets/phone-image/iphone14.jpg';
   Future<void> init() async {
     emit(ProductStateLoading());
     await dbRepo.initDB();
@@ -57,10 +57,4 @@ class ProductCubit extends Cubit<ProductState> {
     products = await dbRepo.fetchProducts();
     emit(ProductStateLoaded());
   }
-
-  // Future<void> addItemToFavorite(int value, int id) async {
-  //   await dbRepo.updateFavorite(id, value);
-  //   products = await dbRepo.fetchProducts();
-  //   emit(ProductStateLoaded());
-  // }
 }

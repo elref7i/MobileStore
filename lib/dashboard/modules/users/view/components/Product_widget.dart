@@ -11,6 +11,10 @@ import 'package:mobile_app/dashboard/modules/users/controller/Mobile_cubit.dart'
 import 'package:mobile_app/dashboard/modules/users/model/Entity_model/Product_model.dart';
 
 class ProductItemWidget extends StatelessWidget {
+  final ProductModel productModel;
+  final ProductCubit controller;
+  final List<ProductModel> products;
+
   ProductItemWidget({
     Key? key,
     required this.productModel,
@@ -18,17 +22,14 @@ class ProductItemWidget extends StatelessWidget {
     required this.products,
   }) : super(key: key);
 
-  final ProductModel productModel;
-  final ProductCubit controller;
-  final List<ProductModel> products;
-  final CartCubit controllerCart = CartCubit();
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CartCubit(),
       child: BlocBuilder<CartCubit, CartState>(
-        builder: (context, state) {
+        builder: (context, cartState) {
+          final cartCubit = context.read<CartCubit>();
+
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: DecoratedBox(
@@ -61,9 +62,7 @@ class ProductItemWidget extends StatelessWidget {
                             width: 100,
                             fit: BoxFit.fill,
                           ),
-                        const SizedBox(
-                          width: 10,
-                        ),
+                        const SizedBox(width: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -97,35 +96,27 @@ class ProductItemWidget extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
-                    const Divider(
-                      thickness: 0.5,
-                    ),
+                    const Divider(thickness: 0.5),
                     // Actions
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         // Favorite
                         InkWell(
-                          child: productModel.favorite == 1
-                              ? const Icon(
-                                  CupertinoIcons.heart_fill,
-                                  color: Colors.red,
-                                  size: 35,
-                                )
-                              : const Icon(
-                                  CupertinoIcons.heart,
-                                  color: Colors.red,
-                                  size: 35,
-                                ),
+                          child: Icon(
+                            productModel.favorite == 1
+                                ? CupertinoIcons.heart_fill
+                                : CupertinoIcons.heart,
+                            color: Colors.red,
+                            size: 35,
+                          ),
                           onTap: () {
-                            if (productModel.favorite == 1) {
-                              controller.addToFavourite(productModel.id, 0);
-                            } else {
-                              controller.addToFavourite(productModel.id, 1);
-                            }
+                            final newState = productModel.favorite == 1 ? 0 : 1;
+                            controller.addToFavourite(
+                                productModel.id, newState);
                           },
                         ),
                         // Separator
@@ -136,41 +127,29 @@ class ProductItemWidget extends StatelessWidget {
                         ),
                         // Cart
                         InkWell(
-                          child: productModel.cart == 1
-                              ? const Icon(
-                                  CupertinoIcons.cart_fill,
-                                  color: Colors.blue,
-                                  size: 35,
-                                )
-                              : const Icon(
-                                  CupertinoIcons.cart,
-                                  color: Colors.blue,
-                                  size: 35,
-
-                                  /// remove from cart ya omar😒
-                                  //  CartCubit.removeItem(cart[index].id!);
-                                ),
+                          child: Icon(
+                            productModel.cart == 1
+                                ? CupertinoIcons.cart_fill
+                                : CupertinoIcons.cart,
+                            color: Colors.blue,
+                            size: 35,
+                          ),
                           onTap: () {
                             if (productModel.cart == 1) {
                               controller.addToCart(productModel.id, 0);
-                              if (my_cart.isNotEmpty) {
-                                my_cart.remove(productModel.id);
-                                // controllerCart.saveData(products, productModel.id - 1);
-                                // controller.addToCart(productModel.id, 0);
-                                deleteCartItem(productModel.id);
-                                log("deleted with id ${productModel.id.toString()}");
-                                // emit(state.copyWith(cart: List.empty()));
-                              }
+                              cartCubit.removeItem(productModel.id);
+                              my_cart.removeWhere(
+                                  (element) => element.id == productModel.id);
+                              log("deleted with id ${productModel.id}");
                             } else {
                               controller.addToCart(productModel.id, 1);
-                              controllerCart.saveData(
-                                  products, productModel.id - 1);
+                              cartCubit.saveData(products, productModel.id - 1);
                               my_cart.add(productModel);
                             }
                           },
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
