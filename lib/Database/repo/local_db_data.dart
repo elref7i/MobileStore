@@ -67,21 +67,21 @@ class DatabaseRepo {
   }
 
   Future<void> insertProduct({
-    required int storageCapacity,
-    required int price,
-    required int ramCapacity,
-    required int year,
-    required int quantity,
-    required int availabilityState,
-    required String brand,
-    required String model,
-    required String color,
-    required String processor,
-    required String cameraResolution,
-    required String os,
-    required String image,
-    required double screenSize,
-    required int discount,
+    int? storageCapacity,
+    int? price,
+    int? ramCapacity,
+    int? year,
+    int? quantity,
+    int? availabilityState,
+    String? brand,
+    String? model,
+    String? color,
+    String? processor,
+    String? cameraResolution,
+    String? os,
+    String? image,
+    double? screenSize,
+    int? discount,
   }) async {
     if (database == null) {
       await initDB();

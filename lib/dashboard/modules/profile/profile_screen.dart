@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/dashboard/modules/users/profile/Setting.dart';
-import 'package:mobile_app/dashboard/modules/users/profile/my_account.dart';
-import 'package:mobile_app/dashboard/modules/users/profile/help.dart';
+import 'package:mobile_app/dashboard/modules/profile/Setting.dart';
+import 'package:mobile_app/dashboard/modules/profile/my_account.dart';
+import 'package:mobile_app/dashboard/modules/profile/help.dart';
 import 'components/profile_menu.dart';
 import 'components/profile_pic.dart';
 

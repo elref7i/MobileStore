@@ -36,7 +36,7 @@ class OPTScreen extends StatelessWidget {
                       ),
                       Text(
                         "VERIFICATION".toUpperCase(),
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(
                         height: 20,

@@ -5,8 +5,9 @@ import 'package:mobile_app/core/cubit/parent_cubit.dart';
 import 'package:mobile_app/core/utils/context_extention.dart';
 import 'package:mobile_app/dashboard/controller/cubit/dashboard_cubit.dart';
 import 'package:mobile_app/dashboard/modules/Cart/View/cart_page.dart';
+import 'package:mobile_app/dashboard/modules/Fav/View/fav_page.dart';
 import 'package:mobile_app/dashboard/modules/Home/view/home_page.dart';
-import 'package:mobile_app/dashboard/modules/users/profile/profile_screen.dart';
+import 'package:mobile_app/dashboard/modules/profile/profile_screen.dart';
 import 'package:mobile_app/dashboard/modules/users/view/page/Product_page.dart';
 import 'package:mobile_app/utils/colors/colors_constant.dart';
 import 'package:badges/badges.dart' as badges;
@@ -16,6 +17,7 @@ class DashboardPage extends StatelessWidget {
     'home_page_tittle'.tr,
     "item_page_title".tr,
     "cart_page_title".tr,
+    "fav".tr,
     "Profile",
   ];
   DashboardPage({super.key});
@@ -68,14 +70,14 @@ class DashboardPage extends StatelessWidget {
                       ),
                       badges.Badge(
                         badgeContent: Text(
-                          '4',
+                          '5',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         position: badges.BadgePosition.topEnd(
-                            top: -5, end: -5), // Adjusted position
+                            top: -6, end: -6), // Adjusted position
                         child: IconButton(
                           onPressed: () {
                             controller.onChangeTabIndex(2);
@@ -98,6 +100,7 @@ class DashboardPage extends StatelessWidget {
                 HomeScreen(),
                 ProductPage(),
                 CartScreen(),
+                FavScreen(),
                 ProfileScreen(),
               ],
             ),
@@ -120,6 +123,10 @@ class DashboardPage extends StatelessWidget {
                 BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.cart),
                     label: "cart_page_title".tr),
+                BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.heart),
+                  label: "Fav".tr,
+                ),
                 BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.person), label: "User"),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/auth/forget/controller/cubit/OTP.dart';
+import 'package:mobile_app/dashboard/modules/Fav/View/fav_page.dart';
 import 'package:mobile_app/dashboard/view/dashboard_page.dart';
 import 'package:mobile_app/screens/Login_Page.dart';
 import 'package:mobile_app/screens/Sign_up.dart';
@@ -40,6 +41,10 @@ class MyRoutes {
       case 'dashboard':
         return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => DashboardPage());
+      case 'Fav':
+        return MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) => FavScreen());
+
       default:
         return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => onBoardingPage());
