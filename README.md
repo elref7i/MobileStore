@@ -1,16 +1,48 @@
-# mobile_app
+# MobileStore
 
-A new Flutter project.
+**MobileStore** is a mobile application built using **Flutter** for managing and purchasing mobile devices and accessories. The app offers a user-friendly interface to perform CRUD (Create, Read, Update, Delete) operations on product details.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Add New Products**: Add new mobile products with name, category, price, description, and images.
+- **View Products**: Browse through a catalog of mobile products.
+- **Update Products**: Edit existing product details.
+- **Delete Products**: Remove products from the system.
+- **Search Functionality**: Easily search for products by name.
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter**: For building the mobile application.
+- **Dart**: Primary programming language for the app.
+- **Firebase**: Used for storing and retrieving product data.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## How to Use
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/elref7i/MobileStore.git
+   ```
+
+2. Navigate into the project directory:
+   ```bash
+   cd MobileStore
+   ```
+
+3. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+
+4. Run the application:
+   ```bash
+   flutter run
+   ```
+
+## Project Structure
+
+- `lib/`: Contains the main Flutter app code.
+- `assets/`: Stores the images and other assets used in the app.
+
+## License
+
+This project is licensed under the MIT License.
